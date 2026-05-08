@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Bukti Tempo — Fintech1000s</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .pulse-ring {
+      animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 1; }
+      80%, 100% { transform: scale(1.4); opacity: 0; }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-4">
+
+  <!-- Loading State -->
+  <div id="state-loading" class="text-center">
+    <div class="relative w-20 h-20 mx-auto mb-6">
+      <div class="pulse-ring absolute inset-0 rounded-full bg-blue-500/30"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    </div>
+    <p class="text-white font-semibold text-lg">Memverifikasi Dokumen...</p>
+    <p id="loading-step" class="text-slate-400 text-sm mt-2">Menghubungkan ke Polygon Mainnet</p>
+  </div>
+
+  <!-- Error State -->
+  <div id="state-error" class="hidden max-w-md w-full fade-in">
+    <div class="bg-white rounded-3xl p-8 shadow-2xl text-center">
+      <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <span class="text-3xl">⚠️</span>
+      </div>
+      <h2 class="text-xl font-bold text-slate-900">Tidak Dapat Diverifikasi</h2>
+      <p id="error-msg" class="text-sm text-slate-500 mt-2">Parameter tidak lengkap atau koneksi gagal.</p>
+      <div class="mt-6 p-4 bg-slate-50 rounded-xl text-left">
+        <p class="text-xs font-semibold text-slate-600 mb-2">Detail Error:</p>
+        <p id="error-detail" class="text-xs font-mono text-red-500 break-all">-</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Valid State -->
+  <div id="state-valid" class="hidden max-w-md w-full fade-in">
+    <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <!-- Header -->
+      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 px-6 py-8 text-center">
+        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-white">Dokumen Sah</h1>
+        <p class="text-emerald-100 text-sm mt-1">Hash terverifikasi di Polygon Mainnet</p>
+      </div>
+
+      <!-- Body -->
+      <div class="p-6">
+        <!-- Badge -->
+        <div class="flex items-center justify-center gap-2 mb-5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-xs font-semibold text-emerald-600">ON-CHAIN VERIFIED</span>
+          <span class="text-xs text-slate-400">· Polygon Mainnet</span>
+        </div>
+
+        <!-- Document Info -->
+        <div class="bg-slate-50 rounded-2xl p-4 space-y-3">
+          <div class="flex justify-between items-start">
+            <span class="text-xs text-slate-500">No. Dokumen</span>
+            <span id="v-docid" class="text-xs font-mono font-bold text-slate-800">-</span>
+          </div>
+          <div class="h-px bg-slate-200"></div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Merchant</span>
+            <span id="v-merchant" class="text-xs font-semibold text-slate-800">-</span>
+          </div>
+          <div class="h-px bg-slate-200"></div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Invoice Asal</span>
+            <span id="v-inv-asal" class="text-xs font-mono text-slate-700">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Invoice Baru</span>
+            <span id="v-inv-baru" class="text-xs font-mono font-bold text-blue-600">-</span>
+          </div>
+          <div class="h-px bg-slate-200"></div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Kreditur</span>
+            <span id="v-kreditur" class="text-xs text-slate-700">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Nominal Pokok</span>
+            <span id="v-nominal" class="text-xs font-bold text-slate-800">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Rate Bunga</span>
+            <span id="v-rate" class="text-xs text-slate-700">-</span>
+          </div>
+          <div class="h-px bg-slate-200"></div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Timestamp</span>
+            <span id="v-timestamp" class="text-xs font-mono text-slate-600">-</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">Block Tersimpan</span>
+            <span id="v-block" class="text-xs font-mono text-slate-600">-</span>
+          </div>
+        </div>
+
+        <!-- Hash Verification Result -->
+        <div class="mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
+          <div class="flex items-center gap-2 mb-3">
+            <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span class="text-xs font-bold text-emerald-700">Hash Cocok — Dokumen Tidak Dimanipulasi</span>
+          </div>
+          <p class="text-[10px] text-emerald-600 mb-1">On-chain hash (dari smart contract):</p>
+          <p id="v-onchain-hash" class="text-[9px] font-mono text-slate-700 break-all bg-white rounded-lg p-2">-</p>
+          <p class="text-[10px] text-emerald-600 mt-2 mb-1">Hash lokal (dihitung ulang dari data):</p>
+          <p id="v-local-hash" class="text-[9px] font-mono text-slate-700 break-all bg-white rounded-lg p-2">-</p>
+        </div>
+
+        <!-- Polygonscan Link -->
+        <a id="v-polygonscan" href="#" target="_blank"
+           class="mt-4 flex items-center justify-center gap-2 w-full py-3 bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold rounded-xl transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          Lihat di Polygonscan
+        </a>
+
+        <p class="text-center text-[10px] text-slate-400 mt-4">Fintech1000s · PT. Mitra Seribu Saudara</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invalid State -->
+  <div id="state-invalid" class="hidden max-w-md w-full fade-in">
+    <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <!-- Header -->
+      <div class="bg-gradient-to-br from-red-500 to-rose-600 px-6 py-8 text-center">
+        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-9 h-9 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-white">Dokumen Tidak Sah</h1>
+        <p class="text-red-100 text-sm mt-1">Hash tidak cocok — data mungkin telah dimanipulasi</p>
+      </div>
+      <div class="p-6">
+        <div id="invalid-docid-row" class="bg-slate-50 rounded-2xl p-4 mb-4">
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">No. Dokumen</span>
+            <span id="inv-docid" class="text-xs font-mono font-bold text-slate-800">-</span>
+          </div>
+        </div>
+        <div class="p-4 bg-red-50 border border-red-200 rounded-2xl">
+          <p class="text-xs font-bold text-red-700 mb-2">⚠ Ketidakcocokan Hash Terdeteksi</p>
+          <p class="text-[10px] text-red-600 mb-1">On-chain hash:</p>
+          <p id="inv-onchain-hash" class="text-[9px] font-mono text-slate-700 break-all bg-white rounded-lg p-2 mb-2">-</p>
+          <p class="text-[10px] text-red-600 mb-1">Hash dari data yang diterima:</p>
+          <p id="inv-local-hash" class="text-[9px] font-mono text-slate-700 break-all bg-white rounded-lg p-2">-</p>
+        </div>
+        <p class="text-center text-[10px] text-slate-400 mt-4">Fintech1000s · PT. Mitra Seribu Saudara</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Not Found State -->
+  <div id="state-notfound" class="hidden max-w-md w-full fade-in">
+    <div class="bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <div class="bg-gradient-to-br from-amber-400 to-orange-500 px-6 py-8 text-center">
+        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-4xl">🔍</span>
+        </div>
+        <h1 class="text-2xl font-bold text-white">Dokumen Tidak Ditemukan</h1>
+        <p class="text-amber-100 text-sm mt-1">Dokumen belum tersimpan di blockchain</p>
+      </div>
+      <div class="p-6">
+        <div class="bg-slate-50 rounded-2xl p-4 mb-4">
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-500">No. Dokumen</span>
+            <span id="nf-docid" class="text-xs font-mono font-bold text-slate-800">-</span>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 text-center">Dokumen ini tidak ditemukan di smart contract Polygon Mainnet. Mungkin belum diproses atau ID tidak valid.</p>
+        <p class="text-center text-[10px] text-slate-400 mt-4">Fintech1000s · PT. Mitra Seribu Saudara</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const POLYGONSCAN = 'https://polygonscan.com/tx/'
+    const RPC_LIST = [
+      'https://polygon.llamarpc.com',
+      'https://polygon.drpc.org',
+      'https://polygon-bor-rpc.publicnode.com',
+      'https://polygon-mainnet.public.blastapi.io',
+    ]
+    const CONTRACT_ABI = [
+      "function verifyDocument(string memory documentId) public view returns (bytes32, uint256, address)",
+      "function documentExists(string memory documentId) public view returns (bool)"
+    ]
+
+    function showState(name) {
+      ['loading','error','valid','invalid','notfound'].forEach(s => {
+        document.getElementById('state-' + s).classList.add('hidden')
+      })
+      document.getElementById('state-' + name).classList.remove('hidden')
+    }
+
+    function setStep(text) {
+      document.getElementById('loading-step').textContent = text
+    }
+
+    function formatRupiah(n) { return 'Rp ' + Number(n).toLocaleString('id-ID') }
+
+    function formatTs(ts) {
+      return new Date(ts).toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' })
+    }
+
+    async function verify() {
+      try {
+        // 1. Parse URL params
+        const params = new URLSearchParams(window.location.search)
+        const docId       = params.get('doc')
+        const invoiceAsal = params.get('invoiceAsal')
+        const invoiceBaru = params.get('invoiceBaru')
+        const merchantId  = params.get('merchantId')
+        const merchantName= params.get('merchantName')
+        const kreditur    = params.get('kreditur')
+        const krediturId  = params.get('krediturId')
+        const nominal     = params.get('nominal')
+        const rateBunga   = params.get('rateBunga')
+        const timestamp   = params.get('timestamp')
+        const contractAddr= params.get('contract')
+        const txHash      = params.get('tx')
+
+        if (!docId || !invoiceAsal || !nominal || !timestamp || !contractAddr) {
+          showState('error')
+          document.getElementById('error-msg').textContent = 'Link verifikasi tidak lengkap atau tidak valid.'
+          document.getElementById('error-detail').textContent = 'Missing: ' +
+            [!docId&&'doc', !invoiceAsal&&'invoiceAsal', !nominal&&'nominal', !timestamp&&'timestamp', !contractAddr&&'contract'].filter(Boolean).join(', ')
+          return
+        }
+
+        // 2. Connect to Polygon (read-only, no private key)
+        setStep('Menghubungkan ke Polygon Mainnet...')
+        let provider = null
+        for (const rpc of RPC_LIST) {
+          try {
+            const p = new ethers.JsonRpcProvider(rpc)
+            await p.getBlockNumber()
+            provider = p
+            break
+          } catch (e) { continue }
+        }
+        if (!provider) throw new Error('Semua RPC gagal. Periksa koneksi internet.')
+
+        // 3. Fetch on-chain data
+        setStep('Membaca hash dari smart contract...')
+        const contract = new ethers.Contract(contractAddr, CONTRACT_ABI, provider)
+
+        const exists = await contract.documentExists(docId)
+        if (!exists) {
+          document.getElementById('nf-docid').textContent = docId
+          showState('notfound')
+          return
+        }
+
+        const [onChainHash, onChainTimestamp, storedBy] = await contract.verifyDocument(docId)
+
+        // 4. Recompute hash from URL params
+        setStep('Menghitung hash dari data...')
+        const documentData = {
+          documentId: docId,
+          invoiceAsal: invoiceAsal,
+          invoiceBaru: invoiceBaru,
+          merchantId: merchantId,
+          merchantName: merchantName,
+          kreditur: kreditur,
+          krediturId: krediturId,
+          nominal: Number(nominal),
+          rateBunga: rateBunga,
+          timestamp: timestamp
+        }
+        const localHash = ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(documentData)))
+
+        // 5. Compare
+        setStep('Membandingkan hash...')
+        const blockNum = Number(onChainTimestamp) // note: this is timestamp from contract, not blockNumber
+        const isMatch = onChainHash.toLowerCase() === localHash.toLowerCase()
+
+        if (isMatch) {
+          // Populate valid state
+          document.getElementById('v-docid').textContent = docId
+          document.getElementById('v-merchant').textContent = merchantName
+          document.getElementById('v-inv-asal').textContent = invoiceAsal
+          document.getElementById('v-inv-baru').textContent = invoiceBaru
+          document.getElementById('v-kreditur').textContent = kreditur
+          document.getElementById('v-nominal').textContent = formatRupiah(nominal)
+          document.getElementById('v-rate').textContent = rateBunga
+          document.getElementById('v-timestamp').textContent = formatTs(timestamp)
+          document.getElementById('v-block').textContent = new Date(Number(onChainTimestamp) * 1000).toLocaleString('id-ID')
+          document.getElementById('v-onchain-hash').textContent = onChainHash
+          document.getElementById('v-local-hash').textContent = localHash
+          if (txHash) document.getElementById('v-polygonscan').href = POLYGONSCAN + txHash
+          showState('valid')
+        } else {
+          document.getElementById('inv-docid').textContent = docId
+          document.getElementById('inv-onchain-hash').textContent = onChainHash
+          document.getElementById('inv-local-hash').textContent = localHash
+          showState('invalid')
+        }
+
+      } catch (e) {
+        showState('error')
+        document.getElementById('error-msg').textContent = 'Terjadi kesalahan saat verifikasi.'
+        document.getElementById('error-detail').textContent = e.message
+      }
+    }
+
+    verify()
+  </script>
+</body>
+</html>
