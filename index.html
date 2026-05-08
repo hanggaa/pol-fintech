@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulasi Perpanjang Tempo + Blockchain — Fintech1000s</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-900 min-h-screen">
+
+  <!-- Config Modal -->
+  <div id="config-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+    <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
+      <h2 class="text-xl font-bold text-slate-900 mb-2">Konfigurasi Blockchain</h2>
+      <p class="text-sm text-slate-500 mb-6">Masukkan data untuk connect ke Polygon Mainnet</p>
+      
+      <div class="space-y-4">
+        <div>
+          <label class="text-xs font-semibold text-slate-600">Private Key (wallet dengan POL)</label>
+          <input id="input-pk" type="password" placeholder="0x..." class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <p class="text-[10px] text-red-500 mt-1">⚠️ Jangan share private key. Hanya untuk simulasi.</p>
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-slate-600">Contract Address (kosongkan jika belum deploy)</label>
+          <input id="input-contract" type="text" placeholder="0x... (opsional)" class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <p class="text-[10px] text-slate-400 mt-1">Jika kosong, sistem akan deploy contract baru.</p>
+        </div>
+      </div>
+
+      <button onclick="initBlockchain()" class="mt-6 w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:scale-[0.98]">Connect & Mulai Simulasi</button>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="main-app" class="hidden">
+    <!-- Header -->
+    <div class="bg-slate-800 border-b border-slate-700 px-6 py-4">
+      <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div>
+          <h1 class="text-lg font-bold text-white">Fintech<span class="text-blue-400">1000s</span> — Simulasi Blockchain</h1>
+          <p class="text-xs text-slate-400 mt-0.5">Polygon Mainnet · Smart Contract Verifikasi</p>
+        </div>
+        <div class="text-right">
+          <p class="text-[10px] text-slate-400">Contract</p>
+          <p id="display-contract" class="text-xs font-mono text-emerald-400 truncate max-w-[200px]">-</p>
+          <p class="text-[10px] text-slate-400 mt-1">Balance</p>
+          <p id="display-balance" class="text-xs font-mono text-white">-</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Tabs -->
+    <div class="max-w-4xl mx-auto px-6 pt-6">
+      <div id="user-tabs" class="flex flex-wrap gap-2 mb-6"></div>
+
+      <!-- User Info -->
+      <div id="user-info" class="bg-slate-800 rounded-2xl p-5 mb-4 border border-slate-700">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs text-slate-400">Merchant</p>
+            <p id="user-name" class="text-lg font-bold text-white">-</p>
+            <p id="user-id" class="text-xs font-mono text-slate-400">-</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs text-slate-400">Limit Tersedia</p>
+            <p id="user-limit" class="text-lg font-bold text-blue-400">-</p>
+            <p class="text-xs text-slate-400">Kreditur: CRI-0001</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice List -->
+      <div class="mb-4">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Invoice INV — Eligible Perpanjang Tempo</p>
+        <div id="invoice-list" class="space-y-3"></div>
+      </div>
+
+      <!-- Transaction Log -->
+      <div class="mt-8 mb-8">
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">📋 Blockchain Transaction Log</p>
+        <div id="tx-log" class="space-y-2">
+          <p class="text-xs text-slate-500 italic">Belum ada transaksi.</p>
+        </div>
+        <div id="export-area" class="mt-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 hidden">
+    <div class="w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl">
+      <h3 class="text-lg font-bold text-slate-900 mb-4">Konfirmasi Perpanjangan Tempo</h3>
+      <div id="confirm-details" class="space-y-2 text-sm"></div>
+      <div class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600">
+        Bunga dihitung berdasarkan nominal pokok. Hash transaksi akan disimpan di Polygon Mainnet.
+      </div>
+      <label class="mt-4 flex items-start gap-2 cursor-pointer">
+        <input type="checkbox" id="confirm-checkbox" onchange="toggleConfirmBtn()" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600" />
+        <span class="text-xs text-slate-600">Saya setuju memperpanjang tempo dan memahami bahwa bunga tetap berjalan hingga seluruh pokok dilunasi.</span>
+      </label>
+      <div class="mt-5 flex gap-2">
+        <button onclick="closeConfirm()" class="flex-1 py-3 border border-slate-300 text-slate-700 text-sm font-semibold rounded-xl">Batal</button>
+        <button id="confirm-btn" onclick="executeExtend()" disabled class="flex-1 py-3 bg-blue-600 text-white text-sm font-semibold rounded-xl disabled:bg-slate-300 disabled:cursor-not-allowed">Ya, Saya Yakin</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Processing Modal -->
+  <div id="processing-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 hidden">
+    <div class="w-full max-w-sm bg-white rounded-3xl p-8 shadow-2xl text-center">
+      <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p class="text-sm font-semibold text-slate-700">Menyimpan ke Blockchain...</p>
+      <p class="text-xs text-slate-400 mt-1">Menunggu konfirmasi dari Polygon Mainnet</p>
+      <p id="processing-step" class="text-xs text-blue-600 mt-3 font-mono">-</p>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 hidden">
+    <div class="w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl text-center">
+      <p class="text-4xl mb-3">🎉</p>
+      <h3 class="text-lg font-bold text-slate-900">Perpanjangan Berhasil!</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4">Hash tersimpan di Polygon Mainnet</p>
+
+      <!-- QR Card -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-4">
+        <div class="flex justify-center mb-4">
+          <div id="qr-code" class="bg-white p-2 rounded-xl shadow-sm"></div>
+        </div>
+        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">✓ Dokumen Valid — On-chain</span>
+        <div class="mt-3 text-left space-y-1.5 text-xs">
+          <div class="flex justify-between"><span class="text-slate-500">Dokumen</span><span id="success-docid" class="font-mono font-bold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Merchant</span><span id="success-merchant" class="font-semibold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Invoice Baru</span><span id="success-fin" class="font-mono font-bold text-blue-600">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Nominal</span><span id="success-nominal" class="font-bold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Block</span><span id="success-block" class="font-mono text-slate-600">-</span></div>
+        </div>
+        <div class="mt-3 pt-3 border-t border-slate-200">
+          <p class="text-[10px] text-slate-400 mb-1">Tx Hash (Polygonscan)</p>
+          <p id="success-hash" class="font-mono text-[9px] text-slate-600 break-all">-</p>
+          <a id="success-tx" href="#" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 text-[10px] font-semibold rounded-lg hover:bg-blue-200 mt-2">View on Polygonscan ↗</a>
+        </div>
+      </div>
+
+      <!-- Hash Verifier -->
+      <details class="text-left mb-4">
+        <summary class="text-xs font-semibold text-slate-600 cursor-pointer hover:text-slate-800">🔐 Verifikasi Hash Manual</summary>
+        <div class="mt-3 p-3 bg-slate-800 rounded-xl">
+          <p class="text-[10px] text-slate-400 mb-2">JSON string yang di-hash (copy ke console ethers.js):</p>
+          <pre id="success-rawjson" class="text-[9px] font-mono text-emerald-400 whitespace-pre-wrap break-all"></pre>
+          <p class="text-[10px] text-slate-400 mt-3 mb-1">Command verifikasi:</p>
+          <code class="text-[9px] font-mono text-amber-400 block break-all">ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(data)))</code>
+          <p class="text-[10px] text-slate-500 mt-2">Hasil harus sama dengan tx hash yang tersimpan on-chain.</p>
+        </div>
+      </details>
+
+      <button onclick="closeSuccess()" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700">Kembali</button>
+    </div>
+  </div>
+
+  <script>
+    // ==================== CONFIG ====================
+    // RPC options (fallback jika satu down)
+    const RPC_LIST = [
+      'https://polygon.llamarpc.com',
+      'https://polygon.drpc.org',
+      'https://polygon-bor-rpc.publicnode.com',
+      'https://polygon-mainnet.public.blastapi.io',
+    ]
+    let POLYGON_RPC = RPC_LIST[0]
+    const CHAIN_ID = 137
+    const POLYGONSCAN = 'https://polygonscan.com/tx/'
+
+    // Contract ABI (storeHash — simpan hash saja, murah)
+    const CONTRACT_ABI = [
+      "function storeHash(string memory documentId, bytes32 hash) public",
+      "function verifyDocument(string memory documentId) public view returns (bytes32, uint256, address)",
+      "function documentExists(string memory documentId) public view returns (bool)",
+      "function totalDocuments() public view returns (uint256)",
+      "event HashStored(string indexed documentId, bytes32 hash, uint256 timestamp, address storedBy)"
+    ]
+
+    // Deploy contract via Remix IDE jika belum punya
+    // https://remix.ethereum.org → paste contract.sol → compile → deploy to Polygon Mainnet
+
+    // ==================== DATA ====================
+    // Data di-embed langsung agar bisa dibuka via file:// tanpa server.
+    // fetch('./data.json') dicoba dulu; kalau gagal (file:// protocol), pakai INLINE_DATA.
+    const INLINE_DATA = {
+      "documents": {},
+      "merchants": {
+        "T9009": {
+          "merchantId": "T9009", "merchantName": "TB Inti Trio Bhakti Jaya", "limit": 15000000,
+          "invoices": [
+            { "id": "INV/202604/0015", "jatuhTempo": "28 Apr 2026", "nominal": 5000000, "days": 5, "finId": "FIN/202604/0001" },
+            { "id": "INV/202604/0108", "jatuhTempo": "30 Apr 2026", "nominal": 540000, "days": -3, "finId": "FIN/202604/0002" },
+            { "id": "INV/202604/0115", "jatuhTempo": "2 Mei 2026", "nominal": 1250000, "days": 7, "finId": "FIN/202604/0003" }
+          ]
+        },
+        "T9015": {
+          "merchantId": "T9015", "merchantName": "TB Sinar Makmur", "limit": 10000000,
+          "invoices": [
+            { "id": "INV/202604/0201", "jatuhTempo": "29 Apr 2026", "nominal": 3500000, "days": 4, "finId": "FIN/202604/0004" },
+            { "id": "INV/202604/0205", "jatuhTempo": "1 Mei 2026", "nominal": 2000000, "days": 6, "finId": "FIN/202604/0005" },
+            { "id": "INV/202604/0210", "jatuhTempo": "3 Mei 2026", "nominal": 800000, "days": 8, "finId": "FIN/202604/0006" }
+          ]
+        },
+        "T9022": {
+          "merchantId": "T9022", "merchantName": "CV Abadi Sejahtera", "limit": 12000000,
+          "invoices": [
+            { "id": "INV/202604/0301", "jatuhTempo": "27 Apr 2026", "nominal": 4200000, "days": 3, "finId": "FIN/202604/0007" },
+            { "id": "INV/202604/0305", "jatuhTempo": "30 Apr 2026", "nominal": 1800000, "days": 5, "finId": "FIN/202604/0008" },
+            { "id": "INV/202604/0310", "jatuhTempo": "2 Mei 2026", "nominal": 6000000, "days": 7, "finId": "FIN/202604/0009" }
+          ]
+        },
+        "T9031": {
+          "merchantId": "T9031", "merchantName": "UD Maju Bersama", "limit": 8000000,
+          "invoices": [
+            { "id": "INV/202604/0401", "jatuhTempo": "28 Apr 2026", "nominal": 1500000, "days": 3, "finId": "FIN/202604/0010" },
+            { "id": "INV/202604/0402", "jatuhTempo": "29 Apr 2026", "nominal": 750000, "days": 4, "finId": "FIN/202604/0011" },
+            { "id": "INV/202604/0403", "jatuhTempo": "30 Apr 2026", "nominal": 2200000, "days": 5, "finId": "FIN/202604/0012" },
+            { "id": "INV/202604/0404", "jatuhTempo": "1 Mei 2026", "nominal": 900000, "days": 6, "finId": "FIN/202604/0013" },
+            { "id": "INV/202604/0405", "jatuhTempo": "2 Mei 2026", "nominal": 1750000, "days": 7, "finId": "FIN/202604/0014" },
+            { "id": "INV/202604/0406", "jatuhTempo": "3 Mei 2026", "nominal": 600000, "days": 8, "finId": "FIN/202604/0015" }
+          ]
+        },
+        "T9038": {
+          "merchantId": "T9038", "merchantName": "TB Karya Mandiri", "limit": 20000000,
+          "invoices": [
+            { "id": "INV/202604/0501", "jatuhTempo": "26 Apr 2026", "nominal": 5500000, "days": -2, "finId": "FIN/202604/0016" },
+            { "id": "INV/202604/0502", "jatuhTempo": "28 Apr 2026", "nominal": 3200000, "days": 3, "finId": "FIN/202604/0017" },
+            { "id": "INV/202604/0503", "jatuhTempo": "29 Apr 2026", "nominal": 4100000, "days": 4, "finId": "FIN/202604/0018" },
+            { "id": "INV/202604/0504", "jatuhTempo": "30 Apr 2026", "nominal": 2800000, "days": 5, "finId": "FIN/202604/0019" },
+            { "id": "INV/202604/0505", "jatuhTempo": "1 Mei 2026", "nominal": 1600000, "days": 6, "finId": "FIN/202604/0020" },
+            { "id": "INV/202604/0506", "jatuhTempo": "4 Mei 2026", "nominal": 3700000, "days": 9, "finId": "FIN/202604/0021" }
+          ]
+        },
+        "T9045": {
+          "merchantId": "T9045", "merchantName": "CV Sejahtera Abadi", "limit": 18000000,
+          "invoices": [
+            { "id": "INV/202604/0601", "jatuhTempo": "27 Apr 2026", "nominal": 6500000, "days": 2, "finId": "FIN/202604/0022" },
+            { "id": "INV/202604/0602", "jatuhTempo": "28 Apr 2026", "nominal": 2100000, "days": 3, "finId": "FIN/202604/0023" },
+            { "id": "INV/202604/0603", "jatuhTempo": "30 Apr 2026", "nominal": 4800000, "days": 5, "finId": "FIN/202604/0024" },
+            { "id": "INV/202604/0604", "jatuhTempo": "1 Mei 2026", "nominal": 1200000, "days": 6, "finId": "FIN/202604/0025" },
+            { "id": "INV/202604/0605", "jatuhTempo": "2 Mei 2026", "nominal": 3300000, "days": 7, "finId": "FIN/202604/0026" },
+            { "id": "INV/202604/0606", "jatuhTempo": "5 Mei 2026", "nominal": 850000, "days": 10, "finId": "FIN/202604/0027" }
+          ]
+        },
+        "T9052": {
+          "merchantId": "T9052", "merchantName": "PD Sumber Rejeki", "limit": 9500000,
+          "invoices": [
+            { "id": "INV/202604/0701", "jatuhTempo": "25 Apr 2026", "nominal": 2400000, "days": -5, "finId": "FIN/202604/0028" },
+            { "id": "INV/202604/0702", "jatuhTempo": "27 Apr 2026", "nominal": 1100000, "days": 2, "finId": "FIN/202604/0029" },
+            { "id": "INV/202604/0703", "jatuhTempo": "29 Apr 2026", "nominal": 3600000, "days": 4, "finId": "FIN/202604/0030" },
+            { "id": "INV/202604/0704", "jatuhTempo": "30 Apr 2026", "nominal": 950000, "days": 5, "finId": "FIN/202604/0031" },
+            { "id": "INV/202604/0705", "jatuhTempo": "2 Mei 2026", "nominal": 1850000, "days": 7, "finId": "FIN/202604/0032" },
+            { "id": "INV/202604/0706", "jatuhTempo": "4 Mei 2026", "nominal": 2700000, "days": 9, "finId": "FIN/202604/0033" }
+          ]
+        }
+      },
+      "publicKey": "",
+      "issuer": "PT. Mitra Seribu Saudara",
+      "system": "Fintech1000s",
+      "network": "Polygon Mainnet",
+      "chainId": 137
+    }
+
+    let seedData = null
+    let users = []
+    let documentStore = {}
+
+    // ==================== STATE ====================
+    let provider, wallet, contract
+    let currentUser = 0
+    let pendingInvoice = null
+    let extendedInvoices = new Set()
+    let txLogs = []
+
+    // Load data — coba fetch dulu, fallback ke INLINE_DATA jika file:// protocol
+    async function loadSeedData() {
+      try {
+        const res = await fetch('./data.json')
+        if (!res.ok) throw new Error('HTTP ' + res.status)
+        seedData = await res.json()
+        console.log('data.json loaded via fetch')
+      } catch (e) {
+        console.warn('fetch gagal, pakai inline data:', e.message)
+        seedData = JSON.parse(JSON.stringify(INLINE_DATA)) // deep clone
+      }
+
+      // Load documents, skip _template entry
+      const rawDocs = seedData.documents || {}
+      documentStore = {}
+      for (const [key, val] of Object.entries(rawDocs)) {
+        if (key !== '_template') documentStore[key] = val
+      }
+      // Restore existing invoices ke extendedInvoices
+      for (const doc of Object.values(documentStore)) {
+        if (doc.invoiceAsal) extendedInvoices.add(doc.invoiceAsal)
+      }
+
+      // Convert merchants map ke array untuk UI (urutan sesuai key)
+      const merchantIds = ['T9009', 'T9015', 'T9022', 'T9031', 'T9038', 'T9045', 'T9052']
+      users = merchantIds.map(mid => {
+        const m = seedData.merchants[mid]
+        return { name: m.merchantName, id: m.merchantId, limit: m.limit, invoices: m.invoices }
+      })
+      renderTabs()
+      console.log('Data siap:', Object.keys(seedData.merchants).length, 'merchants,', Object.keys(documentStore).length, 'documents')
+    }
+
+    // Export current documentStore as JSON (download) — mirip struktur look-a-like/data.json
+    function exportDocuments() {
+      const output = {
+        documents: documentStore,
+        merchants: seedData.merchants,
+        publicKey: wallet ? wallet.address : (seedData.publicKey || ''),
+        issuer: seedData.issuer,
+        system: seedData.system,
+        network: seedData.network,
+        chainId: seedData.chainId
+      }
+      const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'data_polygon_' + new Date().toISOString().slice(0, 10) + '.json'
+      a.click()
+      URL.revokeObjectURL(url)
+    }
+
+    // ==================== INIT ====================
+    async function initBlockchain() {
+      const pk = document.getElementById('input-pk').value.trim()
+      const contractAddr = document.getElementById('input-contract').value.trim()
+
+      if (!pk) { alert('Private key wajib diisi'); return }
+
+      try {
+        // Load data from data.json
+        await loadSeedData()
+        if (users.length === 0) return
+
+        // Try each RPC until one works
+        let connected = false
+        for (const rpc of RPC_LIST) {
+          try {
+            provider = new ethers.JsonRpcProvider(rpc)
+            await provider.getBlockNumber() // test connection
+            POLYGON_RPC = rpc
+            connected = true
+            console.log('Connected to:', rpc)
+            break
+          } catch (e) {
+            console.log('RPC failed:', rpc, e.message)
+            continue
+          }
+        }
+        if (!connected) { alert('Semua RPC gagal. Coba lagi nanti.'); return }
+
+        wallet = new ethers.Wallet(pk, provider)
+
+        const balance = await provider.getBalance(wallet.address)
+        document.getElementById('display-balance').textContent = ethers.formatEther(balance) + ' POL'
+
+        if (contractAddr) {
+          contract = new ethers.Contract(contractAddr, CONTRACT_ABI, wallet)
+          document.getElementById('display-contract').textContent = contractAddr
+        } else {
+          alert('Contract Address wajib diisi.\n\nDeploy contract baru via Remix IDE:\n1. Buka https://remix.ethereum.org\n2. Paste isi contract.sol\n3. Compile (Solidity 0.8.19)\n4. Deploy ke Polygon Mainnet\n5. Copy contract address → paste di sini')
+          return
+        }
+
+        document.getElementById('config-modal').classList.add('hidden')
+        document.getElementById('main-app').classList.remove('hidden')
+        renderUser()
+      } catch (e) {
+        alert('Error: ' + e.message)
+      }
+    }
+
+    // ==================== UI ====================
+    function renderTabs() {
+      const container = document.getElementById('user-tabs')
+      container.innerHTML = users.map((u, i) => `
+        <button onclick="switchUser(${i})" id="tab-${i}" class="px-4 py-2.5 text-sm font-semibold rounded-xl ${i === currentUser ? 'bg-blue-600 text-white' : 'bg-slate-700 text-slate-400 hover:bg-slate-600'}">
+          ${u.name}
+        </button>
+      `).join('')
+    }
+
+    function switchUser(idx) {
+      currentUser = idx
+      renderTabs()
+      renderUser()
+    }
+
+    function renderUser() {
+      const user = users[currentUser]
+      document.getElementById('user-name').textContent = user.name
+      document.getElementById('user-id').textContent = user.id
+      document.getElementById('user-limit').textContent = formatRupiah(user.limit)
+
+      const list = document.getElementById('invoice-list')
+      list.innerHTML = user.invoices.map((inv, i) => {
+        const extended = extendedInvoices.has(inv.id)
+        const badge = inv.days < 0 
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30">Terlambat ' + Math.abs(inv.days) + ' hari</span>'
+          : inv.days <= 7 
+            ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">H-' + inv.days + '</span>'
+            : '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-500/20 text-slate-400 border border-slate-500/30">' + inv.days + ' hari lagi</span>'
+
+        if (extended) {
+          return `<div class="bg-slate-800 border border-emerald-500/30 rounded-2xl p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-2"><p class="text-sm font-bold font-mono text-white">${inv.id}</p><span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">✓ On-chain</span></div>
+                <p class="text-xs text-slate-400 mt-1">→ ${inv.finId}</p>
+              </div>
+              <p class="text-sm font-bold text-emerald-400">${formatRupiah(inv.nominal)}</p>
+            </div>
+          </div>`
+        }
+
+        return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 hover:border-slate-600">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <div class="flex items-center gap-2"><p class="text-sm font-bold font-mono text-white">${inv.id}</p>${badge}</div>
+              <p class="text-xs text-slate-400 mt-1">Jatuh tempo: ${inv.jatuhTempo}</p>
+            </div>
+            <p class="text-sm font-bold text-white">${formatRupiah(inv.nominal)}</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <p class="text-xs text-slate-500">Kreditur: PT Distributor Maju Jaya</p>
+            <button onclick="openConfirm(${currentUser}, ${i})" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl active:scale-95">Perpanjang Tempo</button>
+          </div>
+        </div>`
+      }).join('')
+    }
+
+    function openConfirm(userIdx, invIdx) {
+      const user = users[userIdx]
+      const inv = user.invoices[invIdx]
+      pendingInvoice = { userIdx, invIdx, user, inv }
+
+      document.getElementById('confirm-details').innerHTML = `
+        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Invoice</span><span class="font-mono font-semibold text-slate-800">${inv.id}</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Total Pokok</span><span class="font-mono font-semibold text-slate-800">${formatRupiah(inv.nominal)}</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Kreditur</span><span class="text-slate-800">PT Distributor Maju Jaya</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Rate Bunga</span><span class="font-semibold text-blue-600">0.25% per minggu</span></div>
+        <div class="flex justify-between py-2"><span class="text-slate-500">Invoice Baru</span><span class="font-mono font-semibold text-blue-600">${inv.finId}</span></div>
+      `
+      document.getElementById('confirm-checkbox').checked = false
+      document.getElementById('confirm-btn').disabled = true
+      document.getElementById('confirm-modal').classList.remove('hidden')
+    }
+
+    function closeConfirm() {
+      document.getElementById('confirm-modal').classList.add('hidden')
+      pendingInvoice = null
+    }
+
+    function toggleConfirmBtn() {
+      document.getElementById('confirm-btn').disabled = !document.getElementById('confirm-checkbox').checked
+    }
+
+    async function executeExtend() {
+      if (!pendingInvoice) return
+      const { user, inv } = pendingInvoice
+
+      closeConfirm()
+      document.getElementById('processing-modal').classList.remove('hidden')
+
+      try {
+        const docId = inv.finId.replace('FIN', 'BT')
+        const now = new Date().toISOString()
+
+        // Step 1: Generate hash dari data transaksi
+        document.getElementById('processing-step').textContent = 'Generating hash from transaction data...'
+        const documentData = {
+          documentId: docId,
+          invoiceAsal: inv.id,
+          invoiceBaru: inv.finId,
+          merchantId: user.id,
+          merchantName: user.name,
+          kreditur: 'PT Distributor Maju Jaya',
+          krediturId: 'CRI-0001',
+          nominal: inv.nominal,
+          rateBunga: '0.25%/minggu',
+          timestamp: now
+        }
+        const hash = ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(documentData)))
+
+        // Step 2: Simpan hash ke blockchain
+        document.getElementById('processing-step').textContent = 'Storing hash on Polygon Mainnet...'
+        const tx = await contract.storeHash(docId, hash)
+
+        // Step 3: Wait for confirmation
+        document.getElementById('processing-step').textContent = 'Waiting for confirmation... (tx: ' + tx.hash.substring(0, 14) + '...)'
+        const receipt = await tx.wait()
+
+        // Success — simpan ke documentStore (tanpa hash/signature/algorithm)
+        document.getElementById('processing-modal').classList.add('hidden')
+        extendedInvoices.add(inv.id)
+
+        documentStore[docId] = {
+          documentId: docId,
+          invoiceAsal: inv.id,
+          invoiceBaru: inv.finId,
+          merchantId: user.id,
+          merchantName: user.name,
+          kreditur: 'PT Distributor Maju Jaya',
+          krediturId: 'CRI-0001',
+          nominal: inv.nominal,
+          rateBunga: '0.25%/minggu',
+          timestamp: now,
+          status: 'valid',
+          txHash: tx.hash,
+          blockNumber: receipt.blockNumber,
+          network: 'Polygon Mainnet',
+          createdAt: now
+        }
+
+        console.log('Document stored:', docId, documentStore[docId])
+        renderTxLog()
+
+        // Show success — populate all fields
+        document.getElementById('success-docid').textContent = docId
+        document.getElementById('success-merchant').textContent = user.name
+        document.getElementById('success-fin').textContent = inv.finId
+        document.getElementById('success-nominal').textContent = formatRupiah(inv.nominal)
+        document.getElementById('success-block').textContent = receipt.blockNumber.toLocaleString()
+        document.getElementById('success-hash').textContent = tx.hash
+        document.getElementById('success-tx').href = POLYGONSCAN + tx.hash
+        document.getElementById('success-rawjson').textContent = JSON.stringify(documentData, null, 2)
+
+        // Generate QR code pointing to Polygonscan tx
+        const qrEl = document.getElementById('qr-code')
+        qrEl.innerHTML = '' // clear previous
+        new QRCode(qrEl, {
+          text: POLYGONSCAN + tx.hash,
+          width: 160,
+          height: 160,
+          colorDark: '#1e293b',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        })
+
+        document.getElementById('success-modal').classList.remove('hidden')
+        renderUser()
+      } catch (e) {
+        document.getElementById('processing-modal').classList.add('hidden')
+        alert('Error: ' + e.message)
+      }
+    }
+
+    function closeSuccess() {
+      document.getElementById('success-modal').classList.add('hidden')
+      document.getElementById('qr-code').innerHTML = '' // clear QR for next use
+    }
+
+    function renderTxLog() {
+      const el = document.getElementById('tx-log')
+      const docs = Object.values(documentStore)
+      if (docs.length === 0) {
+        el.innerHTML = '<p class="text-xs text-slate-500 italic">Belum ada transaksi.</p>'
+        return
+      }
+      el.innerHTML = docs.map(doc => `
+        <div class="bg-slate-800 border border-slate-700 rounded-xl p-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-mono font-bold text-white">${doc.documentId}</p>
+              <p class="text-[10px] text-slate-400">${doc.merchantName} · ${formatRupiah(doc.nominal)} · ${new Date(doc.timestamp).toLocaleString('id-ID')}</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">${doc.invoiceAsal} → ${doc.invoiceBaru}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">${doc.status}</span>
+              ${doc.txHash ? `<a href="${POLYGONSCAN}${doc.txHash}" target="_blank" class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold rounded-lg border border-emerald-500/30 hover:bg-emerald-500/30">Polygonscan ↗</a>` : ''}
+            </div>
+          </div>
+          ${doc.txHash ? `<p class="text-[10px] font-mono text-slate-500 mt-1 truncate">Tx: ${doc.txHash}</p>` : ''}
+          ${doc.blockNumber ? `<p class="text-[10px] font-mono text-slate-500">Block: ${doc.blockNumber}</p>` : ''}
+        </div>
+      `).join('')
+
+      // Show export button if there are documents
+      const exportArea = document.getElementById('export-area')
+      if (exportArea) {
+        exportArea.innerHTML = `<button onclick="exportDocuments()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold rounded-xl border border-slate-600 active:scale-95">📥 Export data.json</button>`
+      }
+    }
+
+    function formatRupiah(n) { return 'Rp ' + n.toLocaleString('id-ID') }
+  </script>
+</body>
+</html>
