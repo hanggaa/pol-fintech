@@ -12,26 +12,48 @@
 </head>
 <body class="bg-slate-900 min-h-screen">
 
-  <!-- Config Modal -->
   <div id="config-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
     <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
-      <h2 class="text-xl font-bold text-slate-900 mb-2">Konfigurasi Blockchain</h2>
-      <p class="text-sm text-slate-500 mb-6">Masukkan data untuk connect ke Polygon Mainnet</p>
-      
-      <div class="space-y-4">
-        <div>
-          <label class="text-xs font-semibold text-slate-600">Private Key (wallet dengan POL)</label>
-          <input id="input-pk" type="password" placeholder="0x..." class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <p class="text-[10px] text-red-500 mt-1">⚠️ Jangan share private key. Hanya untuk simulasi.</p>
-        </div>
-        <div>
-          <label class="text-xs font-semibold text-slate-600">Contract Address (kosongkan jika belum deploy)</label>
-          <input id="input-contract" type="text" placeholder="0x... (opsional)" class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          <p class="text-[10px] text-slate-400 mt-1">Jika kosong, sistem akan deploy contract baru.</p>
-        </div>
+      <h2 class="text-xl font-bold text-slate-900 mb-1">Konfigurasi Blockchain</h2>
+      <p class="text-sm text-slate-500 mb-5">Pilih jaringan & masukkan private key</p>
+
+      <!-- Network Selector -->
+      <p class="text-xs font-semibold text-slate-600 mb-2">Pilih Jaringan</p>
+      <div class="grid grid-cols-2 gap-2 mb-5" id="network-cards">
+        <button onclick="selectNetwork('polygon')" id="net-polygon"
+          class="network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 border-purple-500 bg-purple-50 transition-all">
+          <img src="./Polygon.svg" alt="Polygon" class="w-8 h-8">
+          <span class="text-xs font-bold text-purple-700">Polygon</span>
+          <span class="text-[9px] font-mono text-purple-500">Chain 137</span>
+        </button>
+        <button onclick="selectNetwork('optimism')" id="net-optimism"
+          class="network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 transition-all">
+          <img src="./Optimism.png" alt="Optimism" class="w-8 h-8">
+          <span class="text-xs font-bold text-slate-600">Optimism</span>
+          <span class="text-[9px] font-mono text-slate-400">Chain 10</span>
+        </button>
+        <button onclick="selectNetwork('base')" id="net-base"
+          class="network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 transition-all">
+          <img src="./Base.png" alt="Base" class="w-8 h-8">
+          <span class="text-xs font-bold text-slate-600">Base</span>
+          <span class="text-[9px] font-mono text-slate-400">Chain 8453</span>
+        </button>
+        <button onclick="selectNetwork('arbitrum')" id="net-arbitrum"
+          class="network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 transition-all">
+          <img src="./Arbitrum.png" alt="Arbitrum" class="w-8 h-8">
+          <span class="text-xs font-bold text-slate-600">Arbitrum</span>
+          <span class="text-[9px] font-mono text-slate-400">Chain 42161</span>
+        </button>
       </div>
 
-      <button onclick="initBlockchain()" class="mt-6 w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:scale-[0.98]">Connect & Mulai Simulasi</button>
+      <!-- Private Key -->
+      <div>
+        <label class="text-xs font-semibold text-slate-600">Private Key (wallet dengan ETH/POL)</label>
+        <input id="input-pk" type="password" placeholder="0x..." class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <p class="text-[10px] text-red-500 mt-1">⚠️ Jangan share private key. Hanya untuk simulasi internal.</p>
+      </div>
+
+      <button onclick="initBlockchain()" class="mt-5 w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:scale-[0.98]">Connect & Mulai Simulasi</button>
     </div>
   </div>
 
@@ -42,11 +64,14 @@
       <div class="max-w-4xl mx-auto flex items-center justify-between">
         <div>
           <h1 class="text-lg font-bold text-white">Fintech<span class="text-blue-400">1000s</span> — Simulasi Blockchain</h1>
-          <p class="text-xs text-slate-400 mt-0.5">Polygon Mainnet · Smart Contract Verifikasi</p>
+          <div class="flex items-center gap-2 mt-0.5">
+            <span id="header-network-badge" class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center gap-1"><img src="./Polygon.svg" alt="Polygon" class="w-3.5 h-3.5 inline-block"> Polygon Mainnet</span>
+            <button onclick="openSwitchNetwork()" class="text-[10px] text-slate-500 hover:text-slate-300 underline">Ganti Jaringan</button>
+          </div>
         </div>
         <div class="text-right">
           <p class="text-[10px] text-slate-400">Contract</p>
-          <p id="display-contract" class="text-xs font-mono text-emerald-400 truncate max-w-[200px]">-</p>
+          <p id="display-contract" class="text-xs font-mono text-emerald-400 truncate max-w-[180px]">-</p>
           <p class="text-[10px] text-slate-400 mt-1">Balance</p>
           <p id="display-balance" class="text-xs font-mono text-white">-</p>
         </div>
@@ -96,7 +121,7 @@
       <h3 class="text-lg font-bold text-slate-900 mb-4">Konfirmasi Perpanjangan Tempo</h3>
       <div id="confirm-details" class="space-y-2 text-sm"></div>
       <div class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600">
-        Bunga dihitung berdasarkan nominal pokok. Hash transaksi akan disimpan di Polygon Mainnet.
+        Bunga dihitung berdasarkan nominal pokok. Hash transaksi akan disimpan di <span id="confirm-network-name" class="font-semibold text-slate-800">Polygon Mainnet</span>.
       </div>
       <label class="mt-4 flex items-start gap-2 cursor-pointer">
         <input type="checkbox" id="confirm-checkbox" onchange="toggleConfirmBtn()" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600" />
@@ -114,8 +139,20 @@
     <div class="w-full max-w-sm bg-white rounded-3xl p-8 shadow-2xl text-center">
       <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
       <p class="text-sm font-semibold text-slate-700">Menyimpan ke Blockchain...</p>
-      <p class="text-xs text-slate-400 mt-1">Menunggu konfirmasi dari Polygon Mainnet</p>
+      <p id="processing-network-text" class="text-xs text-slate-400 mt-1">Menunggu konfirmasi dari Polygon Mainnet</p>
       <p id="processing-step" class="text-xs text-blue-600 mt-3 font-mono">-</p>
+    </div>
+  </div>
+
+  <!-- Login/Retrieve Data Loading Modal -->
+  <div id="login-loading-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-sm hidden">
+    <div class="w-full max-w-sm bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-2xl text-center">
+      <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <h3 class="text-sm font-bold text-white mb-2">Menghubungkan ke Blockchain...</h3>
+      <p id="login-loading-text" class="text-xs text-slate-400">Menghubungkan ke RPC & memuat data smart contract</p>
+      <div class="mt-4 p-2 bg-slate-900/50 rounded-xl">
+        <p id="login-loading-status" class="text-[10px] text-emerald-400 font-mono">Inisialisasi provider...</p>
+      </div>
     </div>
   </div>
 
@@ -124,7 +161,7 @@
     <div class="w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl text-center">
       <p class="text-4xl mb-3">🎉</p>
       <h3 class="text-lg font-bold text-slate-900">Perpanjangan Berhasil!</h3>
-      <p class="text-xs text-slate-500 mt-1 mb-4">Hash tersimpan di Polygon Mainnet</p>
+      <p id="success-network-text" class="text-xs text-slate-500 mt-1 mb-4">Hash tersimpan di Polygon Mainnet</p>
 
       <!-- QR Card -->
       <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-4">
@@ -140,9 +177,9 @@
           <div class="flex justify-between"><span class="text-slate-500">Block</span><span id="success-block" class="font-mono text-slate-600">-</span></div>
         </div>
         <div class="mt-3 pt-3 border-t border-slate-200">
-          <p class="text-[10px] text-slate-400 mb-1">Tx Hash (Polygonscan)</p>
+          <p id="success-explorer-label" class="text-[10px] text-slate-400 mb-1">Tx Hash (Polygonscan)</p>
           <p id="success-hash" class="font-mono text-[9px] text-slate-600 break-all">-</p>
-          <a id="success-tx" href="#" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 text-[10px] font-semibold rounded-lg hover:bg-blue-200 mt-2">View on Polygonscan ↗</a>
+          <a id="success-tx" href="#" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 text-[10px] font-semibold rounded-lg hover:bg-blue-200 mt-2"><span id="success-tx-text">View on Polygonscan</span> ↗</a>
         </div>
       </div>
 
@@ -163,31 +200,81 @@
   </div>
 
   <script>
-    // ==================== CONFIG ====================
-    // RPC options (fallback jika satu down)
-    const RPC_LIST = [
-      'https://polygon.llamarpc.com',
-      'https://polygon.drpc.org',
-      'https://polygon-bor-rpc.publicnode.com',
-      'https://polygon-mainnet.public.blastapi.io',
-    ]
-    let POLYGON_RPC = RPC_LIST[0]
-    const CHAIN_ID = 137
-    const POLYGONSCAN = 'https://polygonscan.com/tx/'
+    // ==================== NETWORKS CONFIG ====================
+    const NETWORKS = {
+      polygon: {
+        key: 'polygon', name: 'Polygon Mainnet', chainId: 137, symbol: 'POL',
+        icon: '<img src="./Polygon.svg" alt="Polygon" class="w-3.5 h-3.5 inline-block">',
+        badgeClass: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+        contract: '0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a',
+        explorer: 'https://polygonscan.com/tx/',
+        rpcList: [
+          'https://polygon.llamarpc.com', 'https://polygon.drpc.org',
+          'https://polygon-bor-rpc.publicnode.com', 'https://polygon-mainnet.public.blastapi.io'
+        ]
+      },
+      optimism: {
+        key: 'optimism', name: 'Optimism Mainnet', chainId: 10, symbol: 'ETH',
+        icon: '<img src="./Optimism.png" alt="Optimism" class="w-3.5 h-3.5 inline-block">',
+        badgeClass: 'bg-red-500/20 text-red-400 border-red-500/30',
+        contract: '0x1E531360c8CD822c007c9651d9d7Bb3B487e2358',
+        explorer: 'https://optimistic.etherscan.io/tx/',
+        rpcList: [
+          'https://mainnet.optimism.io', 'https://optimism.llamarpc.com',
+          'https://optimism.drpc.org', 'https://optimism-mainnet.public.blastapi.io'
+        ]
+      },
+      base: {
+        key: 'base', name: 'Base Mainnet', chainId: 8453, symbol: 'ETH',
+        icon: '<img src="./Base.png" alt="Base" class="w-3.5 h-3.5 inline-block">',
+        badgeClass: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+        contract: '0xd8c700802f4C1CC0efF097D308F25F35199e8931',
+        explorer: 'https://basescan.org/tx/',
+        rpcList: [
+          'https://mainnet.base.org', 'https://base.llamarpc.com',
+          'https://base.drpc.org', 'https://base-mainnet.public.blastapi.io'
+        ]
+      },
+      arbitrum: {
+        key: 'arbitrum', name: 'Arbitrum Mainnet', chainId: 42161, symbol: 'ETH',
+        icon: '<img src="./Arbitrum.png" alt="Arbitrum" class="w-3.5 h-3.5 inline-block">',
+        badgeClass: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+        contract: '0x2E41236027a12206598B02b1269468cee5488ca4',
+        explorer: 'https://arbiscan.io/tx/',
+        rpcList: [
+          'https://arb1.arbitrum.io/rpc', 'https://arbitrum.llamarpc.com',
+          'https://arbitrum.drpc.org', 'https://arbitrum-mainnet.public.blastapi.io'
+        ]
+      }
+    }
+
     const VERIFY_BASE_URL = 'https://blockchain.hanggaa.xyz/verify.html'
-    let CONTRACT_ADDRESS = '' // stored after connect for use in verify URL
 
-    // Contract ABI (storeHash — simpan hash saja, murah)
-    const CONTRACT_ABI = [
-      "function storeHash(string memory documentId, bytes32 hash) public",
-      "function verifyDocument(string memory documentId) public view returns (bytes32, uint256, address)",
-      "function documentExists(string memory documentId) public view returns (bool)",
-      "function totalDocuments() public view returns (uint256)",
-      "event HashStored(string indexed documentId, bytes32 hash, uint256 timestamp, address storedBy)"
-    ]
+    let selectedNetworkKey = 'polygon' // dari config modal
+    let activeNetwork = NETWORKS.polygon // setelah connect
 
-    // Deploy contract via Remix IDE jika belum punya
-    // https://remix.ethereum.org → paste contract.sol → compile → deploy to Polygon Mainnet
+    function selectNetwork(key) {
+      selectedNetworkKey = key
+      // Update card visual
+      Object.keys(NETWORKS).forEach(k => {
+        const btn = document.getElementById('net-' + k)
+        const net = NETWORKS[k]
+        if (k === key) {
+          const colorMap = { polygon: 'border-purple-500 bg-purple-50', optimism: 'border-red-500 bg-red-50', base: 'border-blue-500 bg-blue-50', arbitrum: 'border-cyan-500 bg-cyan-50' }
+          btn.className = `network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 ${colorMap[k]} transition-all`
+        } else {
+          btn.className = 'network-card flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 transition-all'
+        }
+      })
+    }
+
+    function openSwitchNetwork() {
+      // Reset dan tampilkan kembali config modal untuk ganti network
+      document.getElementById('main-app').classList.add('hidden')
+      document.getElementById('config-modal').classList.remove('hidden')
+      document.getElementById('input-pk').value = ''
+      selectNetwork(activeNetwork.key)
+    }
 
     // ==================== DATA ====================
     // Data di-embed langsung agar bisa dibuka via file:// tanpa server.
@@ -271,15 +358,26 @@
       "chainId": 137
     }
 
+    // Contract ABI (sama untuk semua chain)
+    const CONTRACT_ABI = [
+      "function storeHash(string memory documentId, bytes32 hash) public",
+      "function verifyDocument(string memory documentId) public view returns (bytes32, uint256, address)",
+      "function documentExists(string memory documentId) public view returns (bool)",
+      "function totalDocuments() public view returns (uint256)",
+      "event HashStored(string indexed documentId, bytes32 hash, uint256 timestamp, address storedBy)"
+    ]
+
     let seedData = null
     let users = []
-    let documentStore = {}
+    // documentStore per-network: { polygon: {}, optimism: {}, base: {}, arbitrum: {} }
+    let documentStore = { polygon: {}, optimism: {}, base: {}, arbitrum: {} }
 
     // ==================== STATE ====================
     let provider, wallet, contract
     let currentUser = 0
     let pendingInvoice = null
-    let extendedInvoices = new Set()
+    // extendedInvoices per-network
+    let extendedInvoices = { polygon: new Set(), optimism: new Set(), base: new Set(), arbitrum: new Set() }
     let txLogs = []
 
     // Load data — coba fetch dulu, fallback ke INLINE_DATA jika file:// protocol
@@ -294,15 +392,15 @@
         seedData = JSON.parse(JSON.stringify(INLINE_DATA)) // deep clone
       }
 
-      // Load documents, skip _template entry
-      const rawDocs = seedData.documents || {}
-      documentStore = {}
-      for (const [key, val] of Object.entries(rawDocs)) {
-        if (key !== '_template') documentStore[key] = val
-      }
-      // Restore existing invoices ke extendedInvoices
-      for (const doc of Object.values(documentStore)) {
-        if (doc.invoiceAsal) extendedInvoices.add(doc.invoiceAsal)
+      // Load documents for the active network
+      const netDocs = (seedData.documents && seedData.documents[activeNetwork.key]) || {}
+      documentStore[activeNetwork.key] = {}
+      extendedInvoices[activeNetwork.key] = new Set()
+      for (const [key, val] of Object.entries(netDocs)) {
+        if (key !== '_template') {
+          documentStore[activeNetwork.key][key] = val
+          if (val.invoiceAsal) extendedInvoices[activeNetwork.key].add(val.invoiceAsal)
+        }
       }
 
       // Convert merchants map ke array untuk UI (urutan sesuai key)
@@ -312,7 +410,7 @@
         return { name: m.merchantName, id: m.merchantId, limit: m.limit, invoices: m.invoices }
       })
       renderTabs()
-      console.log('Data siap:', Object.keys(seedData.merchants).length, 'merchants,', Object.keys(documentStore).length, 'documents')
+      console.log('Data siap:', Object.keys(seedData.merchants).length, 'merchants,', Object.keys(documentStore[activeNetwork.key]).length, 'documents on', activeNetwork.name)
     }
 
     // Export current documentStore as JSON (download) — mirip struktur look-a-like/data.json
@@ -320,17 +418,17 @@
       const output = {
         documents: documentStore,
         merchants: seedData.merchants,
-        publicKey: wallet ? wallet.address : (seedData.publicKey || ''),
+        publicKey: wallet ? wallet.address : '',
         issuer: seedData.issuer,
         system: seedData.system,
-        network: seedData.network,
-        chainId: seedData.chainId
+        network: activeNetwork.name,
+        chainId: activeNetwork.chainId
       }
       const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = 'data_polygon_' + new Date().toISOString().slice(0, 10) + '.json'
+      a.download = 'data_' + activeNetwork.key + '_' + new Date().toISOString().slice(0, 10) + '.json'
       a.click()
       URL.revokeObjectURL(url)
     }
@@ -338,50 +436,122 @@
     // ==================== INIT ====================
     async function initBlockchain() {
       const pk = document.getElementById('input-pk').value.trim()
-      const contractAddr = document.getElementById('input-contract').value.trim()
-
       if (!pk) { alert('Private key wajib diisi'); return }
 
-      try {
-        // Load data from data.json
-        await loadSeedData()
-        if (users.length === 0) return
+      activeNetwork = NETWORKS[selectedNetworkKey]
 
-        // Try each RPC until one works
+      // Tampilkan modal loading login
+      const loaderModal = document.getElementById('login-loading-modal')
+      const loaderStatus = document.getElementById('login-loading-status')
+      loaderModal.classList.remove('hidden')
+      loaderStatus.textContent = 'Memuat seed data...'
+
+      try {
+        // Load data
+        await loadSeedData()
+        if (users.length === 0) {
+          loaderModal.classList.add('hidden')
+          return
+        }
+
+        // Try each RPC for selected network
         let connected = false
-        for (const rpc of RPC_LIST) {
+        let activeRpc = ''
+        loaderStatus.textContent = 'Menghubungkan ke RPC ' + activeNetwork.name + '...'
+        for (const rpc of activeNetwork.rpcList) {
           try {
             provider = new ethers.JsonRpcProvider(rpc)
-            await provider.getBlockNumber() // test connection
-            POLYGON_RPC = rpc
+            await provider.getBlockNumber()
             connected = true
-            console.log('Connected to:', rpc)
+            activeRpc = rpc
+            console.log('Connected to:', activeNetwork.name, 'via', rpc)
             break
           } catch (e) {
             console.log('RPC failed:', rpc, e.message)
             continue
           }
         }
-        if (!connected) { alert('Semua RPC gagal. Coba lagi nanti.'); return }
-
-        wallet = new ethers.Wallet(pk, provider)
-
-        const balance = await provider.getBalance(wallet.address)
-        document.getElementById('display-balance').textContent = ethers.formatEther(balance) + ' POL'
-
-        if (contractAddr) {
-          contract = new ethers.Contract(contractAddr, CONTRACT_ABI, wallet)
-          CONTRACT_ADDRESS = contractAddr
-          document.getElementById('display-contract').textContent = contractAddr
-        } else {
-          alert('Contract Address wajib diisi.\n\nDeploy contract baru via Remix IDE:\n1. Buka https://remix.ethereum.org\n2. Paste isi contract.sol\n3. Compile (Solidity 0.8.19)\n4. Deploy ke Polygon Mainnet\n5. Copy contract address → paste di sini')
+        if (!connected) {
+          loaderModal.classList.add('hidden')
+          alert('Semua RPC ' + activeNetwork.name + ' gagal. Coba lagi nanti.')
           return
         }
 
+        loaderStatus.textContent = 'Membuka wallet & membaca saldo...'
+        wallet = new ethers.Wallet(pk, provider)
+        const balance = await provider.getBalance(wallet.address)
+        const balanceStr = parseFloat(ethers.formatEther(balance)).toFixed(6) + ' ' + activeNetwork.symbol
+        document.getElementById('display-balance').textContent = balanceStr
+
+        contract = new ethers.Contract(activeNetwork.contract, CONTRACT_ABI, wallet)
+        document.getElementById('display-contract').textContent = activeNetwork.contract
+
+        // Membaca status on-chain secara sekuensial dengan delay kecil untuk menghindari limitasi batch request (>10) dari RPC gratisan
+        console.log('Memeriksa status on-chain invoice dari smart contract secara sekuensial...')
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+        let checkedCount = 0
+        const totalInvoices = users.reduce((sum, u) => sum + u.invoices.length, 0)
+
+        for (const user of users) {
+          for (const inv of user.invoices) {
+            const docId = inv.finId.replace('FIN', 'BT')
+            checkedCount++
+            loaderStatus.textContent = `Memeriksa invoice ${checkedCount}/${totalInvoices} (${docId})...`
+            try {
+              // Tambahkan sedikit delay antar request
+              await sleep(30)
+              const exists = await contract.documentExists(docId)
+              if (exists) {
+                console.log(`Invoice ${inv.id} (${docId}) ditemukan di blockchain (${activeNetwork.name})`)
+                extendedInvoices[activeNetwork.key].add(inv.id)
+                
+                if (!documentStore[activeNetwork.key][docId]) {
+                  const verified = await contract.verifyDocument(docId) // returns (bytes32, uint256, address)
+                  const timestampVal = verified[1] ? Number(verified[1]) * 1000 : Date.now()
+                  documentStore[activeNetwork.key][docId] = {
+                    documentId: docId,
+                    invoiceAsal: inv.id,
+                    invoiceBaru: inv.finId,
+                    merchantId: user.id,
+                    merchantName: user.name,
+                    kreditur: 'PT Distributor Maju Jaya',
+                    krediturId: 'CRI-0001',
+                    nominal: inv.nominal,
+                    rateBunga: '0.25%/minggu',
+                    timestamp: new Date(timestampVal).toISOString(),
+                    status: 'valid',
+                    txHash: '',
+                    blockNumber: '',
+                    network: activeNetwork.name,
+                    chainId: activeNetwork.chainId,
+                    createdAt: new Date(timestampVal).toISOString()
+                  }
+                }
+              }
+            } catch (err) {
+              // Jika terjadi error decoding/missing revert, itu berarti smart contract belum dideploy di chain ini (alamat kosong)
+              if (err.message.includes('could not decode') || err.message.includes('missing revert data') || err.message.includes('bad result')) {
+                console.log(`Smart contract belum aktif atau tidak merespon di ${activeNetwork.name} untuk dokumen ${docId} (dianggap belum on-chain)`)
+              } else {
+                console.warn(`Gagal memeriksa status on-chain untuk ${docId}:`, err.message)
+              }
+            }
+          }
+        }
+
+        // Update header network badge (innerHTML karena icon adalah img tag)
+        const badge = document.getElementById('header-network-badge')
+        badge.innerHTML = activeNetwork.icon + ' ' + activeNetwork.name
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-semibold border flex items-center gap-1 ' + activeNetwork.badgeClass
+
+        // Tutup modal loading
+        loaderModal.classList.add('hidden')
         document.getElementById('config-modal').classList.add('hidden')
         document.getElementById('main-app').classList.remove('hidden')
         renderUser()
+        renderTxLog()
       } catch (e) {
+        loaderModal.classList.add('hidden')
         alert('Error: ' + e.message)
       }
     }
@@ -410,7 +580,7 @@
 
       const list = document.getElementById('invoice-list')
       list.innerHTML = user.invoices.map((inv, i) => {
-        const extended = extendedInvoices.has(inv.id)
+        const extended = extendedInvoices[activeNetwork.key].has(inv.id)
         const badge = inv.days < 0 
           ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30">Terlambat ' + Math.abs(inv.days) + ' hari</span>'
           : inv.days <= 7 
@@ -457,6 +627,7 @@
         <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Rate Bunga</span><span class="font-semibold text-blue-600">0.25% per minggu</span></div>
         <div class="flex justify-between py-2"><span class="text-slate-500">Invoice Baru</span><span class="font-mono font-semibold text-blue-600">${inv.finId}</span></div>
       `
+      document.getElementById('confirm-network-name').textContent = activeNetwork.name
       document.getElementById('confirm-checkbox').checked = false
       document.getElementById('confirm-btn').disabled = true
       document.getElementById('confirm-modal').classList.remove('hidden')
@@ -476,6 +647,8 @@
       const { user, inv } = pendingInvoice
 
       closeConfirm()
+      // Set text modal loading dinamis
+      document.getElementById('processing-network-text').textContent = 'Menunggu konfirmasi dari ' + activeNetwork.name
       document.getElementById('processing-modal').classList.remove('hidden')
 
       try {
@@ -499,18 +672,18 @@
         const hash = ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(documentData)))
 
         // Step 2: Simpan hash ke blockchain
-        document.getElementById('processing-step').textContent = 'Storing hash on Polygon Mainnet...'
+        document.getElementById('processing-step').textContent = 'Storing hash on ' + activeNetwork.name + '...'
         const tx = await contract.storeHash(docId, hash)
 
         // Step 3: Wait for confirmation
         document.getElementById('processing-step').textContent = 'Waiting for confirmation... (tx: ' + tx.hash.substring(0, 14) + '...)'
         const receipt = await tx.wait()
 
-        // Success — simpan ke documentStore (tanpa hash/signature/algorithm)
+        // Success — simpan ke documentStore per-network
         document.getElementById('processing-modal').classList.add('hidden')
-        extendedInvoices.add(inv.id)
+        extendedInvoices[activeNetwork.key].add(inv.id)
 
-        documentStore[docId] = {
+        documentStore[activeNetwork.key][docId] = {
           documentId: docId,
           invoiceAsal: inv.id,
           invoiceBaru: inv.finId,
@@ -524,21 +697,32 @@
           status: 'valid',
           txHash: tx.hash,
           blockNumber: receipt.blockNumber,
-          network: 'Polygon Mainnet',
+          network: activeNetwork.name,
+          chainId: activeNetwork.chainId,
           createdAt: now
         }
 
-        console.log('Document stored:', docId, documentStore[docId])
+        console.log('Document stored:', docId, 'on', activeNetwork.name)
         renderTxLog()
 
+        // Ambil nama explorer (misal "Polygonscan", "Basescan", "Arbiscan", atau "Optimistic Etherscan")
+        let explorerName = 'Explorer';
+        if (activeNetwork.name.includes('Polygon')) explorerName = 'Polygonscan';
+        else if (activeNetwork.name.includes('Base')) explorerName = 'Basescan';
+        else if (activeNetwork.name.includes('Arbitrum')) explorerName = 'Arbiscan';
+        else if (activeNetwork.name.includes('Optimism')) explorerName = 'Optimism Explorer';
+
         // Show success — populate all fields
+        document.getElementById('success-network-text').textContent = 'Hash tersimpan di ' + activeNetwork.name
         document.getElementById('success-docid').textContent = docId
         document.getElementById('success-merchant').textContent = user.name
         document.getElementById('success-fin').textContent = inv.finId
         document.getElementById('success-nominal').textContent = formatRupiah(inv.nominal)
         document.getElementById('success-block').textContent = receipt.blockNumber.toLocaleString()
+        document.getElementById('success-explorer-label').textContent = 'Tx Hash (' + explorerName + ')'
         document.getElementById('success-hash').textContent = tx.hash
-        document.getElementById('success-tx').href = POLYGONSCAN + tx.hash
+        document.getElementById('success-tx').href = activeNetwork.explorer + tx.hash
+        document.getElementById('success-tx-text').textContent = 'View on ' + explorerName
         document.getElementById('success-rawjson').textContent = JSON.stringify(documentData, null, 2)
 
         // Generate QR code pointing to verify.html
@@ -553,7 +737,8 @@
           nominal: inv.nominal,
           rateBunga: '0.25%/minggu',
           timestamp: now,
-          contract: CONTRACT_ADDRESS,
+          contract: activeNetwork.contract,
+          network: activeNetwork.key,
           tx: tx.hash
         })
         const verifyUrl = VERIFY_BASE_URL + '?' + verifyParams.toString()
@@ -584,9 +769,9 @@
 
     function renderTxLog() {
       const el = document.getElementById('tx-log')
-      const docs = Object.values(documentStore)
+      const docs = Object.values(documentStore[activeNetwork.key] || {})
       if (docs.length === 0) {
-        el.innerHTML = '<p class="text-xs text-slate-500 italic">Belum ada transaksi.</p>'
+        el.innerHTML = '<p class="text-xs text-slate-500 italic">Belum ada transaksi di ' + activeNetwork.name + '.</p>'
         return
       }
       el.innerHTML = docs.map(doc => `
@@ -597,9 +782,10 @@
               <p class="text-[10px] text-slate-400">${doc.merchantName} · ${formatRupiah(doc.nominal)} · ${new Date(doc.timestamp).toLocaleString('id-ID')}</p>
               <p class="text-[10px] text-slate-500 mt-0.5">${doc.invoiceAsal} → ${doc.invoiceBaru}</p>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-col items-end gap-1.5">
               <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">${doc.status}</span>
-              ${doc.txHash ? `<a href="${POLYGONSCAN}${doc.txHash}" target="_blank" class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold rounded-lg border border-emerald-500/30 hover:bg-emerald-500/30">Polygonscan ↗</a>` : ''}
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${activeNetwork.badgeClass}">${activeNetwork.icon} ${activeNetwork.name}</span>
+              ${doc.txHash ? `<a href="${activeNetwork.explorer}${doc.txHash}" target="_blank" class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold rounded-lg border border-emerald-500/30 hover:bg-emerald-500/30">Explorer ↗</a>` : ''}
             </div>
           </div>
           ${doc.txHash ? `<p class="text-[10px] font-mono text-slate-500 mt-1 truncate">Tx: ${doc.txHash}</p>` : ''}
@@ -607,7 +793,6 @@
         </div>
       `).join('')
 
-      // Show export button if there are documents
       const exportArea = document.getElementById('export-area')
       if (exportArea) {
         exportArea.innerHTML = `<button onclick="exportDocuments()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold rounded-xl border border-slate-600 active:scale-95">📥 Export data.json</button>`

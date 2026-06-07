@@ -205,13 +205,30 @@
   </div>
 
   <script>
-    const POLYGONSCAN = 'https://polygonscan.com/tx/'
-    const RPC_LIST = [
-      'https://polygon.llamarpc.com',
-      'https://polygon.drpc.org',
-      'https://polygon-bor-rpc.publicnode.com',
-      'https://polygon-mainnet.public.blastapi.io',
-    ]
+    const VERIFY_BASE = 'https://blockchain.hanggaa.xyz'
+    const NETWORKS = {
+      polygon: {
+        name: 'Polygon Mainnet', explorer: 'https://polygonscan.com/tx/',
+        contract: '0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a',
+        rpcList: ['https://polygon.llamarpc.com','https://polygon.drpc.org','https://polygon-bor-rpc.publicnode.com']
+      },
+      optimism: {
+        name: 'Optimism Mainnet', explorer: 'https://optimistic.etherscan.io/tx/',
+        contract: '0x1E531360c8CD822c007c9651d9d7Bb3B487e2358',
+        rpcList: ['https://mainnet.optimism.io','https://optimism.llamarpc.com','https://optimism.drpc.org']
+      },
+      base: {
+        name: 'Base Mainnet', explorer: 'https://basescan.org/tx/',
+        contract: '0xd8c700802f4C1CC0efF097D308F25F35199e8931',
+        rpcList: ['https://mainnet.base.org','https://base.llamarpc.com','https://base.drpc.org']
+      },
+      arbitrum: {
+        name: 'Arbitrum Mainnet', explorer: 'https://arbiscan.io/tx/',
+        contract: '0x2E41236027a12206598B02b1269468cee5488ca4',
+        rpcList: ['https://arb1.arbitrum.io/rpc','https://arbitrum.llamarpc.com','https://arbitrum.drpc.org']
+      }
+    }
+
     const CONTRACT_ABI = [
       "function verifyDocument(string memory documentId) public view returns (bytes32, uint256, address)",
       "function documentExists(string memory documentId) public view returns (bool)"
@@ -224,45 +241,40 @@
       document.getElementById('state-' + name).classList.remove('hidden')
     }
 
-    function setStep(text) {
-      document.getElementById('loading-step').textContent = text
-    }
-
+    function setStep(text) { document.getElementById('loading-step').textContent = text }
     function formatRupiah(n) { return 'Rp ' + Number(n).toLocaleString('id-ID') }
-
-    function formatTs(ts) {
-      return new Date(ts).toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' })
-    }
+    function formatTs(ts) { return new Date(ts).toLocaleString('id-ID', { dateStyle: 'long', timeStyle: 'short' }) }
 
     async function verify() {
       try {
-        // 1. Parse URL params
         const params = new URLSearchParams(window.location.search)
-        const docId       = params.get('doc')
-        const invoiceAsal = params.get('invoiceAsal')
-        const invoiceBaru = params.get('invoiceBaru')
-        const merchantId  = params.get('merchantId')
-        const merchantName= params.get('merchantName')
-        const kreditur    = params.get('kreditur')
-        const krediturId  = params.get('krediturId')
-        const nominal     = params.get('nominal')
-        const rateBunga   = params.get('rateBunga')
-        const timestamp   = params.get('timestamp')
-        const contractAddr= params.get('contract')
-        const txHash      = params.get('tx')
+        const docId        = params.get('doc')
+        const invoiceAsal  = params.get('invoiceAsal')
+        const invoiceBaru  = params.get('invoiceBaru')
+        const merchantId   = params.get('merchantId')
+        const merchantName = params.get('merchantName')
+        const kreditur     = params.get('kreditur')
+        const krediturId   = params.get('krediturId')
+        const nominal      = params.get('nominal')
+        const rateBunga    = params.get('rateBunga')
+        const timestamp    = params.get('timestamp')
+        const txHash       = params.get('tx')
+        // network key from URL, fallback to polygon; contract can be overridden if passed
+        const networkKey   = params.get('network') || 'polygon'
+        const netConfig    = NETWORKS[networkKey] || NETWORKS.polygon
+        const contractAddr = params.get('contract') || netConfig.contract
 
-        if (!docId || !invoiceAsal || !nominal || !timestamp || !contractAddr) {
+        if (!docId || !invoiceAsal || !nominal || !timestamp) {
           showState('error')
           document.getElementById('error-msg').textContent = 'Link verifikasi tidak lengkap atau tidak valid.'
           document.getElementById('error-detail').textContent = 'Missing: ' +
-            [!docId&&'doc', !invoiceAsal&&'invoiceAsal', !nominal&&'nominal', !timestamp&&'timestamp', !contractAddr&&'contract'].filter(Boolean).join(', ')
+            [!docId&&'doc', !invoiceAsal&&'invoiceAsal', !nominal&&'nominal', !timestamp&&'timestamp'].filter(Boolean).join(', ')
           return
         }
 
-        // 2. Connect to Polygon (read-only, no private key)
-        setStep('Menghubungkan ke Polygon Mainnet...')
+        setStep('Menghubungkan ke ' + netConfig.name + '...')
         let provider = null
-        for (const rpc of RPC_LIST) {
+        for (const rpc of netConfig.rpcList) {
           try {
             const p = new ethers.JsonRpcProvider(rpc)
             await p.getBlockNumber()
@@ -270,12 +282,10 @@
             break
           } catch (e) { continue }
         }
-        if (!provider) throw new Error('Semua RPC gagal. Periksa koneksi internet.')
+        if (!provider) throw new Error('Semua RPC ' + netConfig.name + ' gagal. Periksa koneksi internet.')
 
-        // 3. Fetch on-chain data
         setStep('Membaca hash dari smart contract...')
         const contract = new ethers.Contract(contractAddr, CONTRACT_ABI, provider)
-
         const exists = await contract.documentExists(docId)
         if (!exists) {
           document.getElementById('nf-docid').textContent = docId
@@ -283,31 +293,22 @@
           return
         }
 
-        const [onChainHash, onChainTimestamp, storedBy] = await contract.verifyDocument(docId)
+        const [onChainHash, onChainTimestamp] = await contract.verifyDocument(docId)
 
-        // 4. Recompute hash from URL params
         setStep('Menghitung hash dari data...')
         const documentData = {
           documentId: docId,
-          invoiceAsal: invoiceAsal,
-          invoiceBaru: invoiceBaru,
-          merchantId: merchantId,
-          merchantName: merchantName,
-          kreditur: kreditur,
-          krediturId: krediturId,
+          invoiceAsal, invoiceBaru, merchantId, merchantName,
+          kreditur, krediturId,
           nominal: Number(nominal),
-          rateBunga: rateBunga,
-          timestamp: timestamp
+          rateBunga, timestamp
         }
         const localHash = ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(documentData)))
 
-        // 5. Compare
         setStep('Membandingkan hash...')
-        const blockNum = Number(onChainTimestamp) // note: this is timestamp from contract, not blockNumber
         const isMatch = onChainHash.toLowerCase() === localHash.toLowerCase()
 
         if (isMatch) {
-          // Populate valid state
           document.getElementById('v-docid').textContent = docId
           document.getElementById('v-merchant').textContent = merchantName
           document.getElementById('v-inv-asal').textContent = invoiceAsal
@@ -319,7 +320,8 @@
           document.getElementById('v-block').textContent = new Date(Number(onChainTimestamp) * 1000).toLocaleString('id-ID')
           document.getElementById('v-onchain-hash').textContent = onChainHash
           document.getElementById('v-local-hash').textContent = localHash
-          if (txHash) document.getElementById('v-polygonscan').href = POLYGONSCAN + txHash
+          if (txHash) document.getElementById('v-polygonscan').href = netConfig.explorer + txHash
+          document.getElementById('v-polygonscan').textContent = 'Lihat di ' + netConfig.name.replace(' Mainnet','') + ' Explorer'
           showState('valid')
         } else {
           document.getElementById('inv-docid').textContent = docId
@@ -327,7 +329,6 @@
           document.getElementById('inv-local-hash').textContent = localHash
           showState('invalid')
         }
-
       } catch (e) {
         showState('error')
         document.getElementById('error-msg').textContent = 'Terjadi kesalahan saat verifikasi.'
