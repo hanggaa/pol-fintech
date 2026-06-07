@@ -1,0 +1,404 @@
+{
+  "documents": {
+    "polygon": {},
+    "optimism": {},
+    "base": {},
+    "arbitrum": {
+      "BT/202604/0001": {
+        "documentId": "BT/202604/0001",
+        "invoiceAsal": "INV/202604/0015",
+        "invoiceBaru": "FIN/202604/0001",
+        "merchantId": "T9009",
+        "merchantName": "TB Inti Trio Bhakti Jaya",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 5000000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:21:47.818Z",
+        "status": "valid",
+        "txHash": "0xd8f25f57d78273086615e9ffefc664e48c1894ebd6e3d77b6def5aaf6ef3ecf4",
+        "blockNumber": 470940184,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:21:47.818Z"
+      },
+      "BT/202604/0002": {
+        "documentId": "BT/202604/0002",
+        "invoiceAsal": "INV/202604/0108",
+        "invoiceBaru": "FIN/202604/0002",
+        "merchantId": "T9009",
+        "merchantName": "TB Inti Trio Bhakti Jaya",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 540000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:22:04.868Z",
+        "status": "valid",
+        "txHash": "0xd2481921d13100dfe23e0ae263a4b161ed581cef45c9d5b760a1226a6646321c",
+        "blockNumber": 470940248,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:22:04.868Z"
+      },
+      "BT/202604/0003": {
+        "documentId": "BT/202604/0003",
+        "invoiceAsal": "INV/202604/0115",
+        "invoiceBaru": "FIN/202604/0003",
+        "merchantId": "T9009",
+        "merchantName": "TB Inti Trio Bhakti Jaya",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 1250000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:22:17.750Z",
+        "status": "valid",
+        "txHash": "0x46c4bb7a420df70b0490a045b9055342e6a4c2bceb539b056bbfda632558a914",
+        "blockNumber": 470940301,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:22:17.750Z"
+      },
+      "BT/202604/0004": {
+        "documentId": "BT/202604/0004",
+        "invoiceAsal": "INV/202604/0201",
+        "invoiceBaru": "FIN/202604/0004",
+        "merchantId": "T9015",
+        "merchantName": "TB Sinar Makmur",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 3500000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:22:32.500Z",
+        "status": "valid",
+        "txHash": "0x0e5e73c0ecb5fccd9376cab26455e4a0113961d7e801d4af53d62ee85da0940c",
+        "blockNumber": 470940353,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:22:32.500Z"
+      },
+      "BT/202604/0005": {
+        "documentId": "BT/202604/0005",
+        "invoiceAsal": "INV/202604/0205",
+        "invoiceBaru": "FIN/202604/0005",
+        "merchantId": "T9015",
+        "merchantName": "TB Sinar Makmur",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 2000000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:22:45.266Z",
+        "status": "valid",
+        "txHash": "0x423557d8ca498072741b1298163feac4cdead09ef28908c2935ba7251401fde6",
+        "blockNumber": 470940405,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:22:45.266Z"
+      },
+      "BT/202604/0006": {
+        "documentId": "BT/202604/0006",
+        "invoiceAsal": "INV/202604/0210",
+        "invoiceBaru": "FIN/202604/0006",
+        "merchantId": "T9015",
+        "merchantName": "TB Sinar Makmur",
+        "kreditur": "PT Distributor Maju Jaya",
+        "krediturId": "CRI-0001",
+        "nominal": 800000,
+        "rateBunga": "0.25%/minggu",
+        "timestamp": "2026-06-07T08:22:58.033Z",
+        "status": "valid",
+        "txHash": "0x7b21e8bca8cb3ff772fa2446322148c6643533191231c0925bc27f088d09fdb9",
+        "blockNumber": 470940460,
+        "network": "Arbitrum Mainnet",
+        "chainId": 42161,
+        "createdAt": "2026-06-07T08:22:58.033Z"
+      }
+    }
+  },
+  "merchants": {
+    "T9009": {
+      "merchantId": "T9009",
+      "merchantName": "TB Inti Trio Bhakti Jaya",
+      "limit": 15000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0015",
+          "jatuhTempo": "28 Apr 2026",
+          "nominal": 5000000,
+          "days": 5,
+          "finId": "FIN/202604/0001"
+        },
+        {
+          "id": "INV/202604/0108",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 540000,
+          "days": -3,
+          "finId": "FIN/202604/0002"
+        },
+        {
+          "id": "INV/202604/0115",
+          "jatuhTempo": "2 Mei 2026",
+          "nominal": 1250000,
+          "days": 7,
+          "finId": "FIN/202604/0003"
+        }
+      ]
+    },
+    "T9015": {
+      "merchantId": "T9015",
+      "merchantName": "TB Sinar Makmur",
+      "limit": 10000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0201",
+          "jatuhTempo": "29 Apr 2026",
+          "nominal": 3500000,
+          "days": 4,
+          "finId": "FIN/202604/0004"
+        },
+        {
+          "id": "INV/202604/0205",
+          "jatuhTempo": "1 Mei 2026",
+          "nominal": 2000000,
+          "days": 6,
+          "finId": "FIN/202604/0005"
+        },
+        {
+          "id": "INV/202604/0210",
+          "jatuhTempo": "3 Mei 2026",
+          "nominal": 800000,
+          "days": 8,
+          "finId": "FIN/202604/0006"
+        }
+      ]
+    },
+    "T9022": {
+      "merchantId": "T9022",
+      "merchantName": "CV Abadi Sejahtera",
+      "limit": 12000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0301",
+          "jatuhTempo": "27 Apr 2026",
+          "nominal": 4200000,
+          "days": 3,
+          "finId": "FIN/202604/0007"
+        },
+        {
+          "id": "INV/202604/0305",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 1800000,
+          "days": 5,
+          "finId": "FIN/202604/0008"
+        },
+        {
+          "id": "INV/202604/0310",
+          "jatuhTempo": "2 Mei 2026",
+          "nominal": 6000000,
+          "days": 7,
+          "finId": "FIN/202604/0009"
+        }
+      ]
+    },
+    "T9031": {
+      "merchantId": "T9031",
+      "merchantName": "UD Maju Bersama",
+      "limit": 8000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0401",
+          "jatuhTempo": "28 Apr 2026",
+          "nominal": 1500000,
+          "days": 3,
+          "finId": "FIN/202604/0010"
+        },
+        {
+          "id": "INV/202604/0402",
+          "jatuhTempo": "29 Apr 2026",
+          "nominal": 750000,
+          "days": 4,
+          "finId": "FIN/202604/0011"
+        },
+        {
+          "id": "INV/202604/0403",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 2200000,
+          "days": 5,
+          "finId": "FIN/202604/0012"
+        },
+        {
+          "id": "INV/202604/0404",
+          "jatuhTempo": "1 Mei 2026",
+          "nominal": 900000,
+          "days": 6,
+          "finId": "FIN/202604/0013"
+        },
+        {
+          "id": "INV/202604/0405",
+          "jatuhTempo": "2 Mei 2026",
+          "nominal": 1750000,
+          "days": 7,
+          "finId": "FIN/202604/0014"
+        },
+        {
+          "id": "INV/202604/0406",
+          "jatuhTempo": "3 Mei 2026",
+          "nominal": 600000,
+          "days": 8,
+          "finId": "FIN/202604/0015"
+        }
+      ]
+    },
+    "T9038": {
+      "merchantId": "T9038",
+      "merchantName": "TB Karya Mandiri",
+      "limit": 20000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0501",
+          "jatuhTempo": "26 Apr 2026",
+          "nominal": 5500000,
+          "days": -2,
+          "finId": "FIN/202604/0016"
+        },
+        {
+          "id": "INV/202604/0502",
+          "jatuhTempo": "28 Apr 2026",
+          "nominal": 3200000,
+          "days": 3,
+          "finId": "FIN/202604/0017"
+        },
+        {
+          "id": "INV/202604/0503",
+          "jatuhTempo": "29 Apr 2026",
+          "nominal": 4100000,
+          "days": 4,
+          "finId": "FIN/202604/0018"
+        },
+        {
+          "id": "INV/202604/0504",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 2800000,
+          "days": 5,
+          "finId": "FIN/202604/0019"
+        },
+        {
+          "id": "INV/202604/0505",
+          "jatuhTempo": "1 Mei 2026",
+          "nominal": 1600000,
+          "days": 6,
+          "finId": "FIN/202604/0020"
+        },
+        {
+          "id": "INV/202604/0506",
+          "jatuhTempo": "4 Mei 2026",
+          "nominal": 3700000,
+          "days": 9,
+          "finId": "FIN/202604/0021"
+        }
+      ]
+    },
+    "T9045": {
+      "merchantId": "T9045",
+      "merchantName": "CV Sejahtera Abadi",
+      "limit": 18000000,
+      "invoices": [
+        {
+          "id": "INV/202604/0601",
+          "jatuhTempo": "27 Apr 2026",
+          "nominal": 6500000,
+          "days": 2,
+          "finId": "FIN/202604/0022"
+        },
+        {
+          "id": "INV/202604/0602",
+          "jatuhTempo": "28 Apr 2026",
+          "nominal": 2100000,
+          "days": 3,
+          "finId": "FIN/202604/0023"
+        },
+        {
+          "id": "INV/202604/0603",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 4800000,
+          "days": 5,
+          "finId": "FIN/202604/0024"
+        },
+        {
+          "id": "INV/202604/0604",
+          "jatuhTempo": "1 Mei 2026",
+          "nominal": 1200000,
+          "days": 6,
+          "finId": "FIN/202604/0025"
+        },
+        {
+          "id": "INV/202604/0605",
+          "jatuhTempo": "2 Mei 2026",
+          "nominal": 3300000,
+          "days": 7,
+          "finId": "FIN/202604/0026"
+        },
+        {
+          "id": "INV/202604/0606",
+          "jatuhTempo": "5 Mei 2026",
+          "nominal": 850000,
+          "days": 10,
+          "finId": "FIN/202604/0027"
+        }
+      ]
+    },
+    "T9052": {
+      "merchantId": "T9052",
+      "merchantName": "PD Sumber Rejeki",
+      "limit": 9500000,
+      "invoices": [
+        {
+          "id": "INV/202604/0701",
+          "jatuhTempo": "25 Apr 2026",
+          "nominal": 2400000,
+          "days": -5,
+          "finId": "FIN/202604/0028"
+        },
+        {
+          "id": "INV/202604/0702",
+          "jatuhTempo": "27 Apr 2026",
+          "nominal": 1100000,
+          "days": 2,
+          "finId": "FIN/202604/0029"
+        },
+        {
+          "id": "INV/202604/0703",
+          "jatuhTempo": "29 Apr 2026",
+          "nominal": 3600000,
+          "days": 4,
+          "finId": "FIN/202604/0030"
+        },
+        {
+          "id": "INV/202604/0704",
+          "jatuhTempo": "30 Apr 2026",
+          "nominal": 950000,
+          "days": 5,
+          "finId": "FIN/202604/0031"
+        },
+        {
+          "id": "INV/202604/0705",
+          "jatuhTempo": "2 Mei 2026",
+          "nominal": 1850000,
+          "days": 7,
+          "finId": "FIN/202604/0032"
+        },
+        {
+          "id": "INV/202604/0706",
+          "jatuhTempo": "4 Mei 2026",
+          "nominal": 2700000,
+          "days": 9,
+          "finId": "FIN/202604/0033"
+        }
+      ]
+    }
+  },
+  "publicKey": "0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9",
+  "issuer": "PT. Mitra Seribu Saudara",
+  "system": "Fintech1000s",
+  "network": "Arbitrum Mainnet",
+  "chainId": 42161
+}
