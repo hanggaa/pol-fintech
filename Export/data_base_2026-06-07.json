@@ -2,26 +2,7 @@
   "documents": {
     "polygon": {},
     "optimism": {},
-    "base": {},
-    "arbitrum": {
-      "BT/202604/0001": {
-        "documentId": "BT/202604/0001",
-        "invoiceAsal": "INV/202604/0015",
-        "invoiceBaru": "FIN/202604/0001",
-        "merchantId": "T9009",
-        "merchantName": "TB Inti Trio Bhakti Jaya",
-        "kreditur": "PT Distributor Maju Jaya",
-        "krediturId": "CRI-0001",
-        "nominal": 5000000,
-        "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:21:47.818Z",
-        "status": "valid",
-        "txHash": "0xd8f25f57d78273086615e9ffefc664e48c1894ebd6e3d77b6def5aaf6ef3ecf4",
-        "blockNumber": 470940184,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:21:47.818Z"
-      },
+    "base": {
       "BT/202604/0002": {
         "documentId": "BT/202604/0002",
         "invoiceAsal": "INV/202604/0108",
@@ -32,13 +13,13 @@
         "krediturId": "CRI-0001",
         "nominal": 540000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:04.868Z",
+        "timestamp": "2026-06-07T08:15:45.095Z",
         "status": "valid",
-        "txHash": "0xd2481921d13100dfe23e0ae263a4b161ed581cef45c9d5b760a1226a6646321c",
-        "blockNumber": 470940248,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:04.868Z"
+        "txHash": "0xa0051d61948d52eff873153ec1d7b667df6309ad208cabcd3de7753eb6db9602",
+        "blockNumber": 47015402,
+        "network": "Base Mainnet",
+        "chainId": 8453,
+        "createdAt": "2026-06-07T08:15:45.095Z"
       },
       "BT/202604/0003": {
         "documentId": "BT/202604/0003",
@@ -50,13 +31,13 @@
         "krediturId": "CRI-0001",
         "nominal": 1250000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:17.750Z",
+        "timestamp": "2026-06-07T08:16:20.077Z",
         "status": "valid",
-        "txHash": "0x46c4bb7a420df70b0490a045b9055342e6a4c2bceb539b056bbfda632558a914",
-        "blockNumber": 470940301,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:17.750Z"
+        "txHash": "0x9e1e3c5246a60f0f7acfbbad6036e24d06c11279a1a77414e8e3f02283a73c3a",
+        "blockNumber": 47015419,
+        "network": "Base Mainnet",
+        "chainId": 8453,
+        "createdAt": "2026-06-07T08:16:20.077Z"
       },
       "BT/202604/0004": {
         "documentId": "BT/202604/0004",
@@ -68,13 +49,13 @@
         "krediturId": "CRI-0001",
         "nominal": 3500000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:32.500Z",
+        "timestamp": "2026-06-07T08:16:35.527Z",
         "status": "valid",
-        "txHash": "0x0e5e73c0ecb5fccd9376cab26455e4a0113961d7e801d4af53d62ee85da0940c",
-        "blockNumber": 470940353,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:32.500Z"
+        "txHash": "0x96b805661d00199e4c84332bdf4f07af06e5b9dac5ddcd83095b4d00a4516002",
+        "blockNumber": 47015427,
+        "network": "Base Mainnet",
+        "chainId": 8453,
+        "createdAt": "2026-06-07T08:16:35.527Z"
       },
       "BT/202604/0005": {
         "documentId": "BT/202604/0005",
@@ -86,13 +67,13 @@
         "krediturId": "CRI-0001",
         "nominal": 2000000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:45.266Z",
+        "timestamp": "2026-06-07T08:16:47.643Z",
         "status": "valid",
-        "txHash": "0x423557d8ca498072741b1298163feac4cdead09ef28908c2935ba7251401fde6",
-        "blockNumber": 470940405,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:45.266Z"
+        "txHash": "0xe1a634c60d7bd62e5a5d026bc9da1b37ea346e59f94ea569cd5854b80bf001e5",
+        "blockNumber": 47015433,
+        "network": "Base Mainnet",
+        "chainId": 8453,
+        "createdAt": "2026-06-07T08:16:47.643Z"
       },
       "BT/202604/0006": {
         "documentId": "BT/202604/0006",
@@ -104,15 +85,16 @@
         "krediturId": "CRI-0001",
         "nominal": 800000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:58.033Z",
+        "timestamp": "2026-06-07T08:17:01.493Z",
         "status": "valid",
-        "txHash": "0x7b21e8bca8cb3ff772fa2446322148c6643533191231c0925bc27f088d09fdb9",
-        "blockNumber": 470940460,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:58.033Z"
+        "txHash": "0xb4657d26acd5ae3ee516eb445586eba53fb16d36a2518c7eddedf1f12984bc19",
+        "blockNumber": 47015440,
+        "network": "Base Mainnet",
+        "chainId": 8453,
+        "createdAt": "2026-06-07T08:17:01.493Z"
       }
-    }
+    },
+    "arbitrum": {}
   },
   "merchants": {
     "T9009": {
@@ -399,6 +381,6 @@
   "publicKey": "0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9",
   "issuer": "PT. Mitra Seribu Saudara",
   "system": "Fintech1000s",
-  "network": "Arbitrum Mainnet",
-  "chainId": 42161
+  "network": "Base Mainnet",
+  "chainId": 8453
 }

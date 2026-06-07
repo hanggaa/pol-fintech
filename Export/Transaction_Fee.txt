@@ -1,0 +1,1192 @@
+===================================================================
+Polygon
+===================================================================
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0x307767929652a87bd23650cf868f0a0234217421bab3b34233003095cef79d59 
+Status:
+Success
+Block:
+88074000
+1 Block Confirmation
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.045910940146716242 POL
+($0.003656)
+Gas Price:
+301.132356122 Gwei (0.000000301132356122 POL)
+Gas Limit & Usage by Txn:
+153,649 | 152,461 (99.23%)
+Gas Fees:
+Base: 248.820158227 Gwei |Max: 419.881558715 Gwei |Max Priority: 52.312197895 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.037935370143446647 POL ($0.003021)
+💸 Txn Savings: 0.018104622176531373 POL ($0.001442)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 20
+Position In Block: 140
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0001
+1	_hash	bytes32
+0x50078297303e2e24c573c0a3d3488a96c612107e0ae64654b547777721fc87ef
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0xa3604246264e3c62f6955a9e88251ea959df3b3d6f20023743552ad027fc9fcb 
+Status:
+Success
+Block:
+88074015
+1 Block Confirmation
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.041926263643367782 POL
+($0.003339)
+Gas Price:
+311.670769942 Gwei (0.000000311670769942 POL)
+Gas Limit & Usage by Txn:
+135,638 | 134,521 (99.18%)
+Gas Fees:
+Base: 250.077760572 Gwei |Max: 435.061030088 Gwei |Max Priority: 61.59300937 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.033640710429906012 POL ($0.002679)
+💸 Txn Savings: 0.016598581185100066 POL ($0.001322)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 21
+Position In Block: 90
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0002
+1	_hash	bytes32
+0x984fd86a9a8c220a163f9f9a622acd5329f89bdc2e1cc192947c96cd495aef6c
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0x6b7186ee521e27652bb79fddeb4830fba8e13ae2fe758904464370871b066a50 
+Status:
+Success
+Block:
+88074027
+1 Block Confirmation
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.04404593517047572 POL
+($0.003508)
+Gas Price:
+327.42794932 Gwei (0.00000032742794932 POL)
+Gas Limit & Usage by Txn:
+135,638 | 134,521 (99.18%)
+Gas Fees:
+Base: 252.947227032 Gwei |Max: 441.852648705 Gwei |Max Priority: 74.480722288 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.034026713927571672 POL ($0.00271)
+💸 Txn Savings: 0.015392524985969585 POL ($0.001226)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 22
+Position In Block: 112
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0003
+1	_hash	bytes32
+0xf18b50250c78c5448f32207b570b5b30a2eed3e4b425b7dbb1df85b2145d9a34
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0xdaa6a085ac1eb25c3746298af28eb930c9902100cb9fada28543300c0f38f225 
+Status:
+Success
+Block:
+88074042
+6 Block Confirmations
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.04513383521905443 POL
+($0.003594)
+Gas Price:
+335.51516283 Gwei (0.00000033551516283 POL)
+Gas Limit & Usage by Txn:
+135,638 | 134,521 (99.18%)
+Gas Fees:
+Base: 250.070334021 Gwei |Max: 465.949029584 Gwei |Max Priority: 85.444828809 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.033639711402838941 POL ($0.002679)
+💸 Txn Savings: 0.017546094189614834 POL ($0.001397)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 23
+Position In Block: 132
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0004
+1	_hash	bytes32
+0x4785859f87a051a1c5ba555156bc33a326d634f63934796d3f88dbb63d0ef43a
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0x9891b75b28ed10747b8350377195a9c5c6f481c8fc9103944dd27de08b2934a8 
+Status:
+Success
+Block:
+88074050
+6 Block Confirmations
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.042186470047959798 POL
+($0.003359)
+Gas Price:
+313.605088038 Gwei (0.000000313605088038 POL)
+Gas Limit & Usage by Txn:
+135,638 | 134,521 (99.18%)
+Gas Fees:
+Base: 253.044776828 Gwei |Max: 432.415223462 Gwei |Max Priority: 60.56031121 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.034039836423679388 POL ($0.002711)
+💸 Txn Savings: 0.015982458227371904 POL ($0.001273)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 24
+Position In Block: 105
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0005
+1	_hash	bytes32
+0xc0d06cd2e40838364618b85d6a5e6891f64c94cfbb05983fd1f1b0eec02d1b8a
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x6bcb9E30...6fFea7A3a
+Transaction Hash:
+0xa6ec0311f53df028574dee7b080cfa05e0de5ab61f31306fa10f3f7e5c83cf18 
+Status:
+Success
+Block:
+88074069
+5 Block Confirmations
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x6bcb9E30E23E4e04bBf75249d2893EC6fFea7A3a 
+Value:
+Polygon PoS Chain Logo
+0 POL
+($0.00)
+Transaction Fee:
+0.04462446000481733 POL
+($0.003556)
+Gas Price:
+331.72857773 Gwei (0.00000033172857773 POL)
+Gas Limit & Usage by Txn:
+135,638 | 134,521 (99.18%)
+Gas Fees:
+Base: 251.490052605 Gwei |Max: 447.804446156 Gwei |Max Priority: 80.238525125 Gwei
+Burnt & Txn Savings Fees:
+🔥 Burnt: 0.033830693366477205 POL ($0.002696)
+💸 Txn Savings: 0.015614641896533946 POL ($0.001244)
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 25
+Position In Block: 112
+Input Data:
+#	Name	Type	Data
+0	_uuid	string
+BT/202604/0006
+1	_hash	bytes32
+0xfaac4a2517419ff2b813b438292afacfd015f11137f98048492d1cf06d4cfff2
+  
+ More Details:
+ Click to show less
+
+===================================================================
+Optimism
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0x4867761870dec234b35455df7a3c49da08ca4dfb2c8c17cc79470ac031fbc6b2 
+Status:
+Success
+Block:
+152609415 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000139191242414 ETH ($0.000225)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+139,312 | 138,181 (99.19%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000138225770644 ETH
+L1 Fees Paid:
+0.00000000096547177 ETH
+L1 Gas Price:
+0.000000000061470705 ETH (0.061470705 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 5
+Position In Block: 7
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0001
+1	hash	bytes32
+0x43144f4cca5441eecef11515d76ee6a01ff71f245d7321410283e5b6467ddc04
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0x1dd41d06ecebd3b35e307cc0be0ff80f1c8ab7e726eba31e6e22bffea19aa406 
+Status:
+Success
+Block:
+152609422 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000122100379565 ETH ($0.000197)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000121120230244 ETH
+L1 Fees Paid:
+0.000000000980149321 ETH
+L1 Gas Price:
+0.000000000062742345 ETH (0.062742345 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 6
+Position In Block: 26
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0002
+1	hash	bytes32
+0x52c91e6f191c8605494804fa11bd7b62d96b89933b4989c644a5379e679eb485
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0xd30030148fd1815a035eb83febd2de4034fa48ef9b7adeac9453bc4c5797c5ad 
+Status:
+Success
+Block:
+152609435 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000122098296174 ETH ($0.000197)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000121120230244 ETH
+L1 Fees Paid:
+0.00000000097806593 ETH
+L1 Gas Price:
+0.000000000060489788 ETH (0.060489788 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 7
+Position In Block: 29
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0003
+1	hash	bytes32
+0xd6fe3a51fd67ebae434c8c18b18aa882cc62dfed95d35af4bcb132badbc0ae20
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0xb4989ea7f7c823cb799c0061adf7fd9b9cac52571714ebad4a9cbdfba7f769dd 
+Status:
+Success
+Block:
+152609443 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000122071621502 ETH ($0.000197)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000121120230244 ETH
+L1 Fees Paid:
+0.000000000951391258 ETH
+L1 Gas Price:
+0.000000000062939464 ETH (0.062939464 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 8
+Position In Block: 1
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0004
+1	hash	bytes32
+0xb7f83dd26dc378c3d8fe78d7f9c7e099ae4dfe9f2cbc77677c65be84767d474f
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0xf0ba5ad6684cd78b7def87020f805e55093aa0b0b239624afbb5701d0d6d382e 
+Status:
+Success
+Block:
+152609452 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000122076468584 ETH ($0.000197)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000121120230244 ETH
+L1 Fees Paid:
+0.00000000095623834 ETH
+L1 Gas Price:
+0.000000000062071584 ETH (0.062071584 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 9
+Position In Block: 31
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0005
+1	hash	bytes32
+0x372d1bc27cc65ae5581178f09e23906f629787bf141a7ff4a32c56ef3ad4c52b
+  
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+Store Hash
+Function by
+0xbf26809D...A82CE4EB9
+on
+0x1E531360...B487e2358
+Transaction Hash:
+0xc0d9a0c2ef300b57c97aa038186192b01027fe0f2fbf69716219fcfc702714c5 
+Status:
+Success
+Block:
+152609459 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x1E531360c8CD822c007c9651d9d7Bb3B487e2358 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000122042570843 ETH ($0.000197)
+Gas Price:
+0.001000324 Gwei (0.000000000001000324 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.000000324 Gwei |Max: 0.001000648 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000121120230244 ETH
+L1 Fees Paid:
+0.000000000922340599 ETH
+L1 Gas Price:
+0.000000000058058595 ETH (0.058058595 Gwei)
+L1 Gas Used by Txn:
+1,754
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 10
+Position In Block: 9
+Input Data:
+#	Name	Type	Data
+0	documentId	string
+BT/202604/0006
+1	hash	bytes32
+0x996512dac609810b251ff6bb71175490aaaaf06c053adfc14716a63e56e8ee7e
+  
+ More Details:
+ Click to show less
+===================================================================
+Base
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0x38786dad0f8b25215e98596bd3fe36ea2cffbc6e7bb89d3356124b55e8fb98ba 
+Status:
+Success
+Block:
+47015378 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000830446957742 ETH ($0.001337)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+139,312 | 138,181 (99.19%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000829086 ETH
+L1 Fees Paid:
+0.000000001360957742 ETH
+L1 Gas Price:
+0.000000000121365241 ETH (0.121365241 Gwei)
+L1 Gas Used by Txn:
+1,781
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 5
+Position In Block: 24
+Input Data:
+0ÆÊ¤@:èÂÎã³ÒOLuu?y¥Dl^p/¨Ñ*/'ÌÝM¹BT/202604/0001
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0xa0051d61948d52eff873153ec1d7b667df6309ad208cabcd3de7753eb6db9602 
+Status:
+Success
+Block:
+47015402 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000727721725452 ETH ($0.001173)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000726486 ETH
+L1 Fees Paid:
+0.000000001235725452 ETH
+L1 Gas Price:
+0.000000000112511588 ETH (0.112511588 Gwei)
+L1 Gas Used by Txn:
+1,781
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 6
+Position In Block: 33
+Input Data:
+0ÆÊ¤@Ã:@UÕ4êfßFC=©\3Kñ#8A¿­å¥7ìÞpBT/202604/0002
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0x9e1e3c5246a60f0f7acfbbad6036e24d06c11279a1a77414e8e3f02283a73c3a 
+Status:
+Success
+Block:
+47015419 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000727721151666 ETH ($0.001173)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000726486 ETH
+L1 Fees Paid:
+0.000000001235151666 ETH
+L1 Gas Price:
+0.000000000107245263 ETH (0.107245263 Gwei)
+L1 Gas Used by Txn:
+1,781
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 7
+Position In Block: 106
+Input Data:
+0ÆÊ¤@XØçIør_¢¹ÞÁ½	ØSú380>¤5½BT/202604/0003
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0x96b805661d00199e4c84332bdf4f07af06e5b9dac5ddcd83095b4d00a4516002 
+Status:
+Success
+Block:
+47015427 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000727664134548 ETH ($0.001172)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000726486 ETH
+L1 Fees Paid:
+0.000000001178134548 ETH
+L1 Gas Price:
+0.000000000108117537 ETH (0.108117537 Gwei)
+L1 Gas Used by Txn:
+1,781
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 8
+Position In Block: 65
+Input Data:
+0ÆÊ¤@\JÒ^92ã*
+á³QGÊûÿ"êóFD§l7÷qBT/202604/0004
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0xe1a634c60d7bd62e5a5d026bc9da1b37ea346e59f94ea569cd5854b80bf001e5 
+Status:
+Success
+Block:
+47015433 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+Ad
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000000727629014243 ETH ($0.001172)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000726486 ETH
+L1 Fees Paid:
+0.000000001143014243 ETH
+L1 Gas Price:
+0.000000000104899116 ETH (0.104899116 Gwei)
+L1 Gas Used by Txn:
+1,714
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 9
+Position In Block: 66
+Input Data:
+0ÆÊ¤@$ña©¹%"ùâgNÑª £"ßR¡íL¤BT/202604/0005
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0xd8c70080...5199e8931
+Transaction Hash:
+0xb4657d26acd5ae3ee516eb445586eba53fb16d36a2518c7eddedf1f12984bc19 
+Status:
+Success
+Block:
+47015440 Confirmed by Sequencer
+Timestamp:
+Sponsored:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0xd8c700802f4C1CC0efF097D308F25F35199e8931 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.00000072766656128 ETH ($0.001172)
+Gas Price:
+0.006 Gwei (0.000000000006 ETH)
+Gas Limit & Usage by Txn:
+122,144 | 121,081 (99.13%)
+Gas Fees:
+Base: 0.005 Gwei |Max: 0.011 Gwei |Max Priority: 0.001 Gwei
+L2 Fees Paid:
+0.000000726486 ETH
+L1 Fees Paid:
+0.00000000118056128 ETH
+L1 Gas Price:
+0.000000000101018401 ETH (0.101018401 Gwei)
+L1 Gas Used by Txn:
+1,781
+L1 Fee Scalar:
+0
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 10
+Position In Block: 26
+Input Data:
+0ÆÊ¤@Ém¯éÐËú£¬%Ê)êËÃO¡ÓuBT/202604/0006
+ More Details:
+ Click to show less
+===================================================================
+Arbitrum
+
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0xd8f25f57d78273086615e9ffefc664e48c1894ebd6e3d77b6def5aaf6ef3ecf4 
+Status:
+Success
+Block:
+470940184 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.00000277484 ETH ($0.004476)
+Gas Price Bid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Price Paid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Limit & Usage by Txn:
+139,995 | 138,742 (99.1%)
+Gas Fees:
+Base: 0.02 Gwei |Max: 0.04 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 1
+Position In Block: 2
+Timeboosted: False
+Input Data:
+0ÆÊ¤@%¤l¬C£ÑXMÚuUOûÿçqå&i½·BT/202604/0001
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+ Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0xd2481921d13100dfe23e0ae263a4b161ed581cef45c9d5b760a1226a6646321c 
+Status:
+Success
+Block:
+470940248 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000002447619958 ETH ($0.003948)
+Gas Price Bid:
+0.020122 Gwei (0.000000000020122 ETH)
+Gas Price Paid:
+0.020122 Gwei (0.000000000020122 ETH)
+Gas Limit & Usage by Txn:
+122,827 | 121,639 (99.03%)
+Gas Fees:
+Base: 0.020122 Gwei |Max: 0.040068 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 2
+Position In Block: 2
+Timeboosted: False
+Input Data:
+0ÆÊ¤@A,ÆOôÅNW÷µ¶Ý!Z¼l9«¬yó­BT/202604/0002
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0x46c4bb7a420df70b0490a045b9055342e6a4c2bceb539b056bbfda632558a914 
+Status:
+Success
+Block:
+470940301 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.00000243284 ETH ($0.003924)
+Gas Price Bid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Price Paid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Limit & Usage by Txn:
+122,827 | 121,642 (99.04%)
+Gas Fees:
+Base: 0.02 Gwei |Max: 0.04 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 3
+Position In Block: 1
+Timeboosted: False
+Input Data:
+0ÆÊ¤@<:²
+÷ËUgÈ`Í½|qåÚ
+¢²x8¹Â6Õò¢U|BT/202604/0003
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0x0e5e73c0ecb5fccd9376cab26455e4a0113961d7e801d4af53d62ee85da0940c 
+Status:
+Success
+Block:
+470940353 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.00000243284 ETH ($0.003925)
+Gas Price Bid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Price Paid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Limit & Usage by Txn:
+122,827 | 121,642 (99.04%)
+Gas Fees:
+Base: 0.02 Gwei |Max: 0.040208 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 4
+Position In Block: 2
+Timeboosted: False
+Input Data:
+0ÆÊ¤@Nü3¿ákÊÄÆZÓVPx1?¸«!OËµÄ&BT/202604/0004
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0x423557d8ca498072741b1298163feac4cdead09ef28908c2935ba7251401fde6 
+Status:
+Success
+Block:
+470940405 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.000002451978804 ETH ($0.003955)
+Gas Price Bid:
+0.020158 Gwei (0.000000000020158 ETH)
+Gas Price Paid:
+0.020158 Gwei (0.000000000020158 ETH)
+Gas Limit & Usage by Txn:
+122,827 | 121,638 (99.03%)
+Gas Fees:
+Base: 0.020158 Gwei |Max: 0.04 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 5
+Position In Block: 3
+Timeboosted: False
+Input Data:
+0ÆÊ¤@¾ÍmyÑwnÏìõøâd^¶²¼ÂÓ8^òÐBT/202604/0005
+ More Details:
+ Click to show less
+-------------------------------------------------------------------------
+Transaction Action
+Call
+0x30c6caa4
+Method by
+0xbf26809D...A82CE4EB9
+on
+0x2E412360...ee5488ca4
+Transaction Hash:
+0x7b21e8bca8cb3ff772fa2446322148c6643533191231c0925bc27f088d09fdb9 
+Status:
+Success
+Block:
+470940460 Confirmed by Sequencer
+Timestamp:
+From:
+0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9
+To:
+0x2E41236027a12206598B02b1269468cee5488ca4 
+Value:
+0 ETH
+($0.00)
+Transaction Fee:
+0.00000243284 ETH ($0.003925)
+Gas Price Bid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Price Paid:
+0.02 Gwei (0.00000000002 ETH)
+Gas Limit & Usage by Txn:
+122,827 | 121,642 (99.04%)
+Gas Fees:
+Base: 0.02 Gwei |Max: 0.040044 Gwei |Max Priority: 0 ETH
+Other Attributes:
+Txn Type: 2 (EIP-1559)
+Nonce: 6
+Position In Block: 3
+Timeboosted: False
+Input Data:
+0ÆÊ¤@c¨=#\Ð®!Ø Ñ0O¾÷Âw,jN@åPBT/202604/0006
+ More Details:
+ Click to show less
+===================================================================

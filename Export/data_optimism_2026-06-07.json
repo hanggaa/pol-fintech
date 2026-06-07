@@ -1,9 +1,7 @@
 {
   "documents": {
     "polygon": {},
-    "optimism": {},
-    "base": {},
-    "arbitrum": {
+    "optimism": {
       "BT/202604/0001": {
         "documentId": "BT/202604/0001",
         "invoiceAsal": "INV/202604/0015",
@@ -14,13 +12,13 @@
         "krediturId": "CRI-0001",
         "nominal": 5000000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:21:47.818Z",
+        "timestamp": "2026-06-07T07:33:19.584Z",
         "status": "valid",
-        "txHash": "0xd8f25f57d78273086615e9ffefc664e48c1894ebd6e3d77b6def5aaf6ef3ecf4",
-        "blockNumber": 470940184,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:21:47.818Z"
+        "txHash": "0x4867761870dec234b35455df7a3c49da08ca4dfb2c8c17cc79470ac031fbc6b2",
+        "blockNumber": 152609415,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:33:19.584Z"
       },
       "BT/202604/0002": {
         "documentId": "BT/202604/0002",
@@ -32,13 +30,13 @@
         "krediturId": "CRI-0001",
         "nominal": 540000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:04.868Z",
+        "timestamp": "2026-06-07T07:33:35.333Z",
         "status": "valid",
-        "txHash": "0xd2481921d13100dfe23e0ae263a4b161ed581cef45c9d5b760a1226a6646321c",
-        "blockNumber": 470940248,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:04.868Z"
+        "txHash": "0x1dd41d06ecebd3b35e307cc0be0ff80f1c8ab7e726eba31e6e22bffea19aa406",
+        "blockNumber": 152609422,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:33:35.333Z"
       },
       "BT/202604/0003": {
         "documentId": "BT/202604/0003",
@@ -50,13 +48,13 @@
         "krediturId": "CRI-0001",
         "nominal": 1250000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:17.750Z",
+        "timestamp": "2026-06-07T07:34:01.949Z",
         "status": "valid",
-        "txHash": "0x46c4bb7a420df70b0490a045b9055342e6a4c2bceb539b056bbfda632558a914",
-        "blockNumber": 470940301,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:17.750Z"
+        "txHash": "0xd30030148fd1815a035eb83febd2de4034fa48ef9b7adeac9453bc4c5797c5ad",
+        "blockNumber": 152609435,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:34:01.949Z"
       },
       "BT/202604/0004": {
         "documentId": "BT/202604/0004",
@@ -68,13 +66,13 @@
         "krediturId": "CRI-0001",
         "nominal": 3500000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:32.500Z",
+        "timestamp": "2026-06-07T07:34:16.315Z",
         "status": "valid",
-        "txHash": "0x0e5e73c0ecb5fccd9376cab26455e4a0113961d7e801d4af53d62ee85da0940c",
-        "blockNumber": 470940353,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:32.500Z"
+        "txHash": "0xb4989ea7f7c823cb799c0061adf7fd9b9cac52571714ebad4a9cbdfba7f769dd",
+        "blockNumber": 152609443,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:34:16.315Z"
       },
       "BT/202604/0005": {
         "documentId": "BT/202604/0005",
@@ -86,13 +84,13 @@
         "krediturId": "CRI-0001",
         "nominal": 2000000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:45.266Z",
+        "timestamp": "2026-06-07T07:34:35.631Z",
         "status": "valid",
-        "txHash": "0x423557d8ca498072741b1298163feac4cdead09ef28908c2935ba7251401fde6",
-        "blockNumber": 470940405,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:45.266Z"
+        "txHash": "0xf0ba5ad6684cd78b7def87020f805e55093aa0b0b239624afbb5701d0d6d382e",
+        "blockNumber": 152609452,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:34:35.631Z"
       },
       "BT/202604/0006": {
         "documentId": "BT/202604/0006",
@@ -104,15 +102,17 @@
         "krediturId": "CRI-0001",
         "nominal": 800000,
         "rateBunga": "0.25%/minggu",
-        "timestamp": "2026-06-07T08:22:58.033Z",
+        "timestamp": "2026-06-07T07:34:48.548Z",
         "status": "valid",
-        "txHash": "0x7b21e8bca8cb3ff772fa2446322148c6643533191231c0925bc27f088d09fdb9",
-        "blockNumber": 470940460,
-        "network": "Arbitrum Mainnet",
-        "chainId": 42161,
-        "createdAt": "2026-06-07T08:22:58.033Z"
+        "txHash": "0xc0d9a0c2ef300b57c97aa038186192b01027fe0f2fbf69716219fcfc702714c5",
+        "blockNumber": 152609459,
+        "network": "Optimism Mainnet",
+        "chainId": 10,
+        "createdAt": "2026-06-07T07:34:48.548Z"
       }
-    }
+    },
+    "base": {},
+    "arbitrum": {}
   },
   "merchants": {
     "T9009": {
@@ -399,6 +399,6 @@
   "publicKey": "0xbf26809D7dA71c7b980FD26330e6293A82CE4EB9",
   "issuer": "PT. Mitra Seribu Saudara",
   "system": "Fintech1000s",
-  "network": "Arbitrum Mainnet",
-  "chainId": 42161
+  "network": "Optimism Mainnet",
+  "chainId": 10
 }
