@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,16 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.9.0/ethers.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', sans-serif; }</style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
+
 <body class="bg-slate-900 min-h-screen">
 
   <div id="config-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
@@ -49,11 +57,15 @@
       <!-- Private Key -->
       <div>
         <label class="text-xs font-semibold text-slate-600">Private Key (wallet dengan ETH/POL)</label>
-        <input id="input-pk" type="password" placeholder="0x..." class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <p class="text-[10px] text-red-500 mt-1">⚠️ Jangan share private key. Hanya untuk simulasi internal.</p>
+        <input id="input-pk" type="password" placeholder="0x..."
+          class="w-full mt-1 px-4 py-3 border border-slate-300 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <p class="text-[10px] text-red-500 mt-1">⚠️ Jangan share private key. Hanya untuk simulasi internal.:
+          0x160dc31e58d58ac096accf9098bb71811ac72e70b5845102600aa496a7f0e822</p>
       </div>
 
-      <button onclick="initBlockchain()" class="mt-5 w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:scale-[0.98]">Connect & Mulai Simulasi</button>
+      <button onclick="initBlockchain()"
+        class="mt-5 w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 active:scale-[0.98]">Connect
+        & Mulai Simulasi</button>
     </div>
   </div>
 
@@ -63,15 +75,24 @@
     <div class="bg-slate-800 border-b border-slate-700 px-6 py-4">
       <div class="max-w-4xl mx-auto flex items-center justify-between">
         <div>
-          <h1 class="text-lg font-bold text-white">Fintech<span class="text-blue-400">1000s</span> — Simulasi Blockchain</h1>
+          <h1 class="text-lg font-bold text-white">Fintech<span class="text-blue-400">1000s</span> — Simulasi Blockchain
+          </h1>
           <div class="flex items-center gap-2 mt-0.5">
-            <span id="header-network-badge" class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center gap-1"><img src="./Polygon.svg" alt="Polygon" class="w-3.5 h-3.5 inline-block"> Polygon Mainnet</span>
-            <button onclick="openSwitchNetwork()" class="text-[10px] text-slate-500 hover:text-slate-300 underline">Ganti Jaringan</button>
+            <span id="header-network-badge"
+              class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center gap-1"><img
+                src="./Polygon.svg" alt="Polygon" class="w-3.5 h-3.5 inline-block"> Polygon Mainnet</span>
+            <button onclick="openSwitchNetwork()"
+              class="text-[10px] text-slate-500 hover:text-slate-300 underline">Ganti Jaringan</button>
           </div>
         </div>
         <div class="text-right">
           <p class="text-[10px] text-slate-400">Contract</p>
-          <p id="display-contract" class="text-xs font-mono text-emerald-400 truncate max-w-[180px]">-</p>
+          <div class="flex items-center justify-end gap-1.5 mt-0.5">
+            <p id="display-contract" class="text-xs font-mono text-emerald-400 truncate max-w-[150px]">-</p>
+            <a id="header-contract-explorer" href="#" target="_blank"
+              class="px-1.5 py-0.5 bg-slate-700/50 hover:bg-slate-600 hover:text-blue-300 text-slate-300 border border-slate-600 rounded text-[9px] font-semibold transition-all hidden"
+              title="Lihat Kontrak di Explorer">↗</a>
+          </div>
           <p class="text-[10px] text-slate-400 mt-1">Balance</p>
           <p id="display-balance" class="text-xs font-mono text-white">-</p>
         </div>
@@ -100,7 +121,8 @@
 
       <!-- Invoice List -->
       <div class="mb-4">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Invoice INV — Eligible Perpanjang Tempo</p>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Invoice INV — Eligible Perpanjang
+          Tempo</p>
         <div id="invoice-list" class="space-y-3"></div>
       </div>
 
@@ -121,15 +143,21 @@
       <h3 class="text-lg font-bold text-slate-900 mb-4">Konfirmasi Perpanjangan Tempo</h3>
       <div id="confirm-details" class="space-y-2 text-sm"></div>
       <div class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600">
-        Bunga dihitung berdasarkan nominal pokok. Hash transaksi akan disimpan di <span id="confirm-network-name" class="font-semibold text-slate-800">Polygon Mainnet</span>.
+        Bunga dihitung berdasarkan nominal pokok. Hash transaksi akan disimpan di <span id="confirm-network-name"
+          class="font-semibold text-slate-800">Polygon Mainnet</span>.
       </div>
       <label class="mt-4 flex items-start gap-2 cursor-pointer">
-        <input type="checkbox" id="confirm-checkbox" onchange="toggleConfirmBtn()" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600" />
-        <span class="text-xs text-slate-600">Saya setuju memperpanjang tempo dan memahami bahwa bunga tetap berjalan hingga seluruh pokok dilunasi.</span>
+        <input type="checkbox" id="confirm-checkbox" onchange="toggleConfirmBtn()"
+          class="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-600" />
+        <span class="text-xs text-slate-600">Saya setuju memperpanjang tempo dan memahami bahwa bunga tetap berjalan
+          hingga seluruh pokok dilunasi.</span>
       </label>
       <div class="mt-5 flex gap-2">
-        <button onclick="closeConfirm()" class="flex-1 py-3 border border-slate-300 text-slate-700 text-sm font-semibold rounded-xl">Batal</button>
-        <button id="confirm-btn" onclick="executeExtend()" disabled class="flex-1 py-3 bg-blue-600 text-white text-sm font-semibold rounded-xl disabled:bg-slate-300 disabled:cursor-not-allowed">Ya, Saya Yakin</button>
+        <button onclick="closeConfirm()"
+          class="flex-1 py-3 border border-slate-300 text-slate-700 text-sm font-semibold rounded-xl">Batal</button>
+        <button id="confirm-btn" onclick="executeExtend()" disabled
+          class="flex-1 py-3 bg-blue-600 text-white text-sm font-semibold rounded-xl disabled:bg-slate-300 disabled:cursor-not-allowed">Ya,
+          Saya Yakin</button>
       </div>
     </div>
   </div>
@@ -145,7 +173,8 @@
   </div>
 
   <!-- Login/Retrieve Data Loading Modal -->
-  <div id="login-loading-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-sm hidden">
+  <div id="login-loading-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 p-4 backdrop-blur-sm hidden">
     <div class="w-full max-w-sm bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-2xl text-center">
       <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
       <h3 class="text-sm font-bold text-white mb-2">Menghubungkan ke Blockchain...</h3>
@@ -168,34 +197,45 @@
         <div class="flex justify-center mb-4">
           <div id="qr-code" class="bg-white p-2 rounded-xl shadow-sm"></div>
         </div>
-        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">✓ Dokumen Valid — On-chain</span>
+        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">✓ Dokumen Valid —
+          On-chain</span>
         <div class="mt-3 text-left space-y-1.5 text-xs">
-          <div class="flex justify-between"><span class="text-slate-500">Dokumen</span><span id="success-docid" class="font-mono font-bold text-slate-800">-</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Merchant</span><span id="success-merchant" class="font-semibold text-slate-800">-</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Invoice Baru</span><span id="success-fin" class="font-mono font-bold text-blue-600">-</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Nominal</span><span id="success-nominal" class="font-bold text-slate-800">-</span></div>
-          <div class="flex justify-between"><span class="text-slate-500">Block</span><span id="success-block" class="font-mono text-slate-600">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Dokumen</span><span id="success-docid"
+              class="font-mono font-bold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Merchant</span><span id="success-merchant"
+              class="font-semibold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Invoice Baru</span><span id="success-fin"
+              class="font-mono font-bold text-blue-600">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Nominal</span><span id="success-nominal"
+              class="font-bold text-slate-800">-</span></div>
+          <div class="flex justify-between"><span class="text-slate-500">Block</span><span id="success-block"
+              class="font-mono text-slate-600">-</span></div>
         </div>
         <div class="mt-3 pt-3 border-t border-slate-200">
           <p id="success-explorer-label" class="text-[10px] text-slate-400 mb-1">Tx Hash (Polygonscan)</p>
           <p id="success-hash" class="font-mono text-[9px] text-slate-600 break-all">-</p>
-          <a id="success-tx" href="#" target="_blank" class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 text-[10px] font-semibold rounded-lg hover:bg-blue-200 mt-2"><span id="success-tx-text">View on Polygonscan</span> ↗</a>
+          <a id="success-tx" href="#" target="_blank"
+            class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 text-[10px] font-semibold rounded-lg hover:bg-blue-200 mt-2"><span
+              id="success-tx-text">View on Polygonscan</span> ↗</a>
         </div>
       </div>
 
       <!-- Hash Verifier -->
       <details class="text-left mb-4">
-        <summary class="text-xs font-semibold text-slate-600 cursor-pointer hover:text-slate-800">🔐 Verifikasi Hash Manual</summary>
+        <summary class="text-xs font-semibold text-slate-600 cursor-pointer hover:text-slate-800">🔐 Verifikasi Hash
+          Manual</summary>
         <div class="mt-3 p-3 bg-slate-800 rounded-xl">
           <p class="text-[10px] text-slate-400 mb-2">JSON string yang di-hash (copy ke console ethers.js):</p>
           <pre id="success-rawjson" class="text-[9px] font-mono text-emerald-400 whitespace-pre-wrap break-all"></pre>
           <p class="text-[10px] text-slate-400 mt-3 mb-1">Command verifikasi:</p>
-          <code class="text-[9px] font-mono text-amber-400 block break-all">ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(data)))</code>
+          <code
+            class="text-[9px] font-mono text-amber-400 block break-all">ethers.keccak256(ethers.toUtf8Bytes(JSON.stringify(data)))</code>
           <p class="text-[10px] text-slate-500 mt-2">Hasil harus sama dengan tx hash yang tersimpan on-chain.</p>
         </div>
       </details>
 
-      <button onclick="closeSuccess()" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700">Kembali</button>
+      <button onclick="closeSuccess()"
+        class="w-full py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700">Kembali</button>
     </div>
   </div>
 
@@ -273,6 +313,8 @@
       document.getElementById('main-app').classList.add('hidden')
       document.getElementById('config-modal').classList.remove('hidden')
       document.getElementById('input-pk').value = ''
+      const expLink = document.getElementById('header-contract-explorer')
+      if (expLink) expLink.classList.add('hidden')
       selectNetwork(activeNetwork.key)
     }
 
@@ -486,6 +528,20 @@
         contract = new ethers.Contract(activeNetwork.contract, CONTRACT_ABI, wallet)
         document.getElementById('display-contract').textContent = activeNetwork.contract
 
+        // Set explorer link button next to contract address
+        let explorerName = 'Explorer'
+        if (activeNetwork.name.includes('Polygon')) explorerName = 'Polygonscan'
+        else if (activeNetwork.name.includes('Base')) explorerName = 'Basescan'
+        else if (activeNetwork.name.includes('Arbitrum')) explorerName = 'Arbiscan'
+        else if (activeNetwork.name.includes('Optimism')) explorerName = 'Optimism Explorer'
+
+        const expLink = document.getElementById('header-contract-explorer')
+        if (expLink) {
+          expLink.href = activeNetwork.explorer.replace('/tx/', '/address/') + activeNetwork.contract
+          expLink.title = 'Lihat Kontrak di ' + explorerName
+          expLink.classList.remove('hidden')
+        }
+
         // Membaca status on-chain secara sekuensial dengan delay kecil untuk menghindari limitasi batch request (>10) dari RPC gratisan
         console.log('Memeriksa status on-chain invoice dari smart contract secara sekuensial...')
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -504,7 +560,7 @@
               if (exists) {
                 console.log(`Invoice ${inv.id} (${docId}) ditemukan di blockchain (${activeNetwork.name})`)
                 extendedInvoices[activeNetwork.key].add(inv.id)
-                
+
                 if (!documentStore[activeNetwork.key][docId]) {
                   const verified = await contract.verifyDocument(docId) // returns (bytes32, uint256, address)
                   const timestampVal = verified[1] ? Number(verified[1]) * 1000 : Date.now()
@@ -581,9 +637,9 @@
       const list = document.getElementById('invoice-list')
       list.innerHTML = user.invoices.map((inv, i) => {
         const extended = extendedInvoices[activeNetwork.key].has(inv.id)
-        const badge = inv.days < 0 
+        const badge = inv.days < 0
           ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30">Terlambat ' + Math.abs(inv.days) + ' hari</span>'
-          : inv.days <= 7 
+          : inv.days <= 7
             ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/20 text-amber-400 border border-amber-500/30">H-' + inv.days + '</span>'
             : '<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-500/20 text-slate-400 border border-slate-500/30">' + inv.days + ' hari lagi</span>'
 
@@ -802,4 +858,5 @@
     function formatRupiah(n) { return 'Rp ' + n.toLocaleString('id-ID') }
   </script>
 </body>
+
 </html>
